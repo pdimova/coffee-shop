@@ -1,0 +1,9 @@
+﻿@model CoffeeShop.WebUI.ViewModels.Store.FinalOrderViewModel
+
+<h3>Bravo</h3>
+
+@Html.DisplayFor(m => m.FullDescription)
+@Html.DisplayFor(m => m.Price)
+
+
+@Html.ActionLink("Confirm Order", "Confirm", "Store", new { @class = "btn btn-default", role = "button" })
