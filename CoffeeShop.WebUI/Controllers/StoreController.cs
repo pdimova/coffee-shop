@@ -4,6 +4,7 @@ using CoffeeShop.Logic.Stores.Abstract;
 using CoffeeShop.WebUI.ViewModels.Store;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CoffeeShop.WebUI.Controllers
@@ -23,16 +24,20 @@ namespace CoffeeShop.WebUI.Controllers
 
         public ActionResult Index(string city)
         {
+            city = HttpUtility.HtmlEncode(city); // sanitize the user input if such
+
             OrderWizardViewModel orderWizardVM = new OrderWizardViewModel();
             orderWizardVM.CoffeeTypes = this.menuProvider.GetCoffeeTypes();
             orderWizardVM.CoffeeSizes = this.menuProvider.GetCoffeeSizes();
+            orderWizardVM.CoffeeCondiments = new Dictionary<string, bool>();
 
             var condimentList = this.menuProvider.GetCoffeeCondiments();
-            orderWizardVM.CoffeeCondiments = new Dictionary<string, bool>();
+            
             foreach (var condiment in condimentList)
             {
                 orderWizardVM.CoffeeCondiments.Add(condiment, false);
             }
+
             ViewBag.City = city;
             return View(orderWizardVM);
         }
