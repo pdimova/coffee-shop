@@ -4,14 +4,14 @@
 
     public interface ICondimentsFactory
     {
-        ICoffee GetMilk(ICoffee beverage);
+        ICoffee GetMilk(ICoffee coffee);
 
-        ICoffee GetChocolate(ICoffee beverage);
+        ICoffee GetChocolate(ICoffee coffee);
 
-        ICoffee GetCaramel(ICoffee beverage);
+        ICoffee GetCaramel(ICoffee coffee);
 
-        ICoffee GetCinnamon(ICoffee beverage);
+        ICoffee GetCinnamon(ICoffee coffee);
 
-        ICoffee GetWhippedCream(ICoffee beverage);
+        ICoffee GetWhippedCream(ICoffee coffee);
     }
 }

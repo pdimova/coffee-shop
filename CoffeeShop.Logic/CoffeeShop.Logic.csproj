@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cart\Cart.cs" />
     <Compile Include="Coffee\CoffeeTypes\Abstract\Coffee.cs" />
     <Compile Include="Coffee\CoffeSizeType.cs" />
     <Compile Include="Coffee\CoffeeTypes\Americano.cs" />
-    <Compile Include="Coffee\CoffeeTypes\Capuccino.cs" />
+    <Compile Include="Coffee\CoffeeTypes\Cappuccino.cs" />
     <Compile Include="Coffee\CoffeeTypes\Espresso.cs" />
     <Compile Include="Coffee\CoffeeTypes\Factory\ICoffeeTypeFactory.cs" />
     <Compile Include="Coffee\CoffeeTypes\Factory\IPlovdivStoreCoffeeTypeFactory.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Order\Order.cs" />
     <Compile Include="Order\ProcessedOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCart\ShoppingCart.cs" />
     <Compile Include="Stores\Abstract\CoffeeStore.cs" />
     <Compile Include="Stores\Abstract\ICoffeeStore.cs" />
     <Compile Include="Stores\PlovdivCoffeeStore.cs" />

@@ -78,6 +78,7 @@ namespace CoffeeShop.WebUI.App_Start
             kernel.Bind(x => x
              .FromAssemblyContaining<ICoffee>()
              .SelectAllClasses()
+             .Excluding<ICoffee>()
              .BindAllInterfaces());
 
             kernel.Bind(x => x
@@ -94,7 +95,7 @@ namespace CoffeeShop.WebUI.App_Start
             //.Configure((b, comp) => b.Named(comp.Name)));
 
             kernel.Bind<ICoffee>().To<Americano>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetAmericano(default(CoffeSizeType)));
-            kernel.Bind<ICoffee>().To<Capuccino>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetCappucino(default(CoffeSizeType)));
+            kernel.Bind<ICoffee>().To<Cappuccino>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetCappucino(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Espresso>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetEspresso(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Latte>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetLatte(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Ristretto>().NamedLikeFactoryMethod((IPlovdivStoreCoffeeTypeFactory f) => f.GetRistretto(default(CoffeSizeType)));
@@ -109,7 +110,7 @@ namespace CoffeeShop.WebUI.App_Start
             var sofiaStoreStrategies = new Dictionary<string, Func<CoffeSizeType, ICoffee>>
             {
                 { "Americano", kernel.Get<ICoffeeTypeFactory>().GetAmericano },
-                { "Capuccino", kernel.Get<ICoffeeTypeFactory>().GetCappucino },
+                { "Cappuccino", kernel.Get<ICoffeeTypeFactory>().GetCappucino },
                 { "Espresso", kernel.Get<ICoffeeTypeFactory>().GetEspresso },
                 { "Latte", kernel.Get<ICoffeeTypeFactory>().GetLatte },
                 { "Doppio", kernel.Get<ISofiaStoreCoffeeTypeFactory>().GetDoppio },
@@ -118,7 +119,7 @@ namespace CoffeeShop.WebUI.App_Start
             var plovdivStoreStrategies = new Dictionary<string, Func<CoffeSizeType, ICoffee>>
             {
                 { "Americano", kernel.Get<ICoffeeTypeFactory>().GetAmericano },
-                { "Capuccino", kernel.Get<ICoffeeTypeFactory>().GetCappucino },
+                { "Cappuccino", kernel.Get<ICoffeeTypeFactory>().GetCappucino },
                 { "Espresso", kernel.Get<ICoffeeTypeFactory>().GetEspresso },
                 { "Latte", kernel.Get<ICoffeeTypeFactory>().GetLatte },
                 { "Ristretto", kernel.Get<IPlovdivStoreCoffeeTypeFactory>().GetRistretto },

@@ -21,7 +21,7 @@
             var coffeeSize = CoffeSizeType.Medium;
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj, Is.InstanceOf<ICoffee>());
@@ -34,7 +34,7 @@
             var coffeeSize = CoffeSizeType.Medium;
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj, Is.InstanceOf<Coffee>());
@@ -47,10 +47,10 @@
             var coffeeSize = CoffeSizeType.Medium;
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
-            Assert.That(obj, Is.InstanceOf<Capuccino>());
+            Assert.That(obj, Is.InstanceOf<Cappuccino>());
         }
 
         [Test]
@@ -61,7 +61,7 @@
             var expectedDescription = "Capuccino";
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj.FullDescription, Does.Contain(expectedDescription));
@@ -75,7 +75,7 @@
             var expectedSize = coffeeSize.ToString();
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj.FullDescription, Does.Contain(expectedSize));
@@ -88,7 +88,7 @@
             var coffeeSize = CoffeSizeType.Medium;
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj, Has.Property("FullDescription"));
@@ -104,7 +104,7 @@
             var expectedFullDescription = expectedSize + " " + expectedDescription;
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj, Has.Property("FullDescription").EqualTo(expectedFullDescription));
@@ -120,7 +120,7 @@
             var expectedCost = basePrice + (((int)coffeeSize / 100) * basePrice);
 
             // Act
-            var obj = new Capuccino(coffeeSize);
+            var obj = new Cappuccino(coffeeSize);
 
             // Assert
             Assert.That(obj.Cost(), Is.EqualTo(expectedCost));

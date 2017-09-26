@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-md-6" id="coffee-order">
-        @using (Ajax.BeginForm("Index", "Store", new { city = @ViewBag.City }, options))
+        @using (Ajax.BeginForm("Index", "Store", new { city = ViewBag.City }, options))
         {
             <div id="divCoffeeType">
                 <h2>Step 1 : Choose your favourite coffee flavour</h2>
@@ -41,10 +41,10 @@
                     {
                         string tagID = "alabala" + counter2;
 
-                        @Html.RadioButtonFor(m => m.SelectedCoffeeSize, coffeeSize, new { id = tagID, @class = "size-options" })
+                @Html.RadioButtonFor(m => m.SelectedCoffeeSize, coffeeSize, new { id = tagID, @class = "size-options" })
 
-                        <label for=@tagID>@coffeeSize</label>
-                        <br />
+                <label for=@tagID>@coffeeSize</label>
+                <br />
                         counter2++;
                     }
                 }
@@ -60,19 +60,19 @@
                     foreach (var coffeCondiment in Model.CoffeeCondiments)
                     {
                         string tagID = "check" + counter3;
-                        @Html.CheckBoxFor(m => m.CoffeeCondiments[coffeCondiment.Key], new { id = tagID, @class = "condiment-options", data_condiment = @coffeCondiment.Key })
+                @Html.CheckBoxFor(m => m.CoffeeCondiments[coffeCondiment.Key], new { id = tagID, @class = "condiment-options", data_condiment = @coffeCondiment.Key })
 
-                        <label for=@tagID>@coffeCondiment.Key</label>
-                        <br />
+                <label for=@tagID>@coffeCondiment.Key</label>
+                <br />
                         counter3++;
 
-                        <br />
+                <br />
                     }
                 }
                 <br />
 
                 <input type="button" name="prevBtn" value='Previous' />
-                <input type="submit" name="nextBtn" value='Finish' />
+                <input type="submit" name="finishBtn" value='Finish' />
             </div>
 
                     }
@@ -98,7 +98,7 @@
             $("div#coffee-order div").hide();
             $("div#coffee-order div:first").show();
 
-            $(":button").click(function () {
+            $(":button").click(function (e) {
                 var parentDiv = $(this).parent();
                 $("div#coffee-order div").hide();
                 if ($(this).val() == "Previous") {
@@ -129,7 +129,7 @@
 
             });
 
-            $("div#divCoffeeCondiments").on("click", ".condiment-options", function () {
+            $("div#divCoffeeCondiments").on("click", ".condiment-options", function (e) {
                 $this = $(this);
                 var url = "@Url.Action("ShowCondiment", "Visualizations")"
                 var condiment = $this.attr('data-condiment');
