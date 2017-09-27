@@ -30,7 +30,7 @@
             this.condimentsStrategies = condimentsStrategies;
         }
 
-        public IProcessedOrder ProcessOrder(IOrder order)
+        public ICoffee ProcessOrder(IOrder order)
 
         {
             ICoffee coffee;
@@ -53,9 +53,10 @@
             }
 
             // Might not be so good idea to return IProcessedOrder insted of ICoffee
-            var processedOrder = this.processedOrderFactory.CreateOrder(coffee);
+            //var processedOrder = this.processedOrderFactory.CreateOrder(coffee);
+            //return processedOrder;
 
-            return processedOrder;
+            return coffee;
         }
 
         // abstract factory method

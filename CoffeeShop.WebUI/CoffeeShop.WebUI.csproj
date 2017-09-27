@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\VisualizationsController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ShoppingCart\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModels\Store\FinalOrderViewModel.cs" />
     <Compile Include="ViewModels\Store\OrderWizardViewModel.cs" />
   </ItemGroup>
@@ -323,6 +325,7 @@
     <Content Include="Views\Visualizations\ShowCondiment.cshtml" />
     <Content Include="Views\Store\Success.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\Home\" />

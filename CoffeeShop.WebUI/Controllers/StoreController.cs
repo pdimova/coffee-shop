@@ -32,7 +32,7 @@ namespace CoffeeShop.WebUI.Controllers
             orderWizardVM.CoffeeCondiments = new Dictionary<string, bool>();
 
             var condimentList = this.menuProvider.GetCoffeeCondiments();
-            
+
             foreach (var condiment in condimentList)
             {
                 orderWizardVM.CoffeeCondiments.Add(condiment, false);
@@ -52,11 +52,12 @@ namespace CoffeeShop.WebUI.Controllers
                 order.SelectedCoffeeSize = data.SelectedCoffeeSize;
                 order.SelectedCoffeeCodimentsList = data.CoffeeCondiments.Where(c => c.Value == true).Select(c => c.Key).ToList();
 
-                var processedOrder = this.store.ProcessOrder(order);
+                var coffee = this.store.ProcessOrder(order);
+                TempData["order"] = coffee;
 
                 FinalOrderViewModel finalOrderViewModel = new FinalOrderViewModel();
-                finalOrderViewModel.FullDescription = processedOrder.FullDescription;
-                finalOrderViewModel.Price = processedOrder.Cost;
+                finalOrderViewModel.FullDescription = coffee.FullDescription;
+                finalOrderViewModel.Price = coffee.Cost();
 
                 return PartialView("Success", finalOrderViewModel);
             }

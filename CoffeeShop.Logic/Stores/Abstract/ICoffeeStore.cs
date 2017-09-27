@@ -1,10 +1,10 @@
 ﻿namespace CoffeeShop.Logic.Stores.Abstract
 {
-    using Order;
+    using CoffeeShop.Logic.Coffee.Abstract;
     using Order.Abstract;
 
     public interface ICoffeeStore
     {
-        IProcessedOrder ProcessOrder(IOrder order);
+        ICoffee ProcessOrder(IOrder order);
     }
 }

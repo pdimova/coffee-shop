@@ -24,6 +24,8 @@ namespace CoffeeShop.WebUI.App_Start
     using System.Linq;
     using System.Collections.Generic;
     using System.Web;
+    using CoffeeShop.Logic.Cart.Repository;
+    using CoffeeShop.Data;
 
     public static class NinjectWebCommon
     {
@@ -93,6 +95,8 @@ namespace CoffeeShop.WebUI.App_Start
             //.InheritedFrom<IStore>()
             //.BindAllInterfaces()
             //.Configure((b, comp) => b.Named(comp.Name)));
+
+            kernel.Bind<ICartRepository>().To<CartRepository>();
 
             kernel.Bind<ICoffee>().To<Americano>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetAmericano(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Cappuccino>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetCappucino(default(CoffeSizeType)));
