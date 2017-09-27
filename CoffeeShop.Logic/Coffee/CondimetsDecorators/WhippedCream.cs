@@ -7,6 +7,7 @@
     {
         private decimal basePrice = 0.85m;
         private string condimentDescription = "Whipped Cream";
+        private string id = "WIC5";
         private ICoffee coffee;
 
         public WhippedCream(ICoffee coffee)
@@ -23,6 +24,8 @@
         {
             get { return this.coffee.FullDescription + " " + condimentDescription; }
         }
+
+        public string Id => this.coffee.Id + this.id;
 
         public decimal Cost()
         {

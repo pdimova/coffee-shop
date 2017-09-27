@@ -4,6 +4,8 @@
     {
         string FullDescription { get; }
 
+        string Id { get; }
+
         decimal Cost();
     }
 }

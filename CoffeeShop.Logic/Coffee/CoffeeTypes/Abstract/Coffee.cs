@@ -17,6 +17,8 @@
             get { return this.Size + " " + this.Description; }
         }
 
+        public abstract string Id { get; }
+
         protected string Description
         {
             get { return this.description; }
