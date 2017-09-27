@@ -1,0 +1,58 @@
+﻿@model CoffeeShop.WebUI.ViewModels.ShoppingCart.ShoppingCartViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>
+    <em>Review</em> your cart:
+</h3>
+<p class="button">
+    @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout")
+</p>
+<div id="update-message">
+</div>
+<table>
+    <tr>
+        <th>
+            Order
+        </th>
+        <th>
+            Price (each)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.CoffeeId">
+            <td>
+                @Html.ActionLink(item.CoffeeDescription, "Details", "Store")
+            </td>
+            <td>
+                @item.CoffeeCost
+            </td>
+            <td id="item-count-@item.CoffeeId">
+                @item.Count
+            </td>
+            <td>
+                <a href="#" class="RemoveLink" data-id="@item.CoffeeId">
+                    Remove from cart
+                </a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            Total
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total">
+            @Model.CartTotal
+        </td>
+    </tr>
+</table>
+
