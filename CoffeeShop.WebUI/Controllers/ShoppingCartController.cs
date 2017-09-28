@@ -21,20 +21,20 @@ namespace CoffeeShop.WebUI.Controllers
             this.shoppingCart = shoppingCart;
         }
 
-        // GET: ShoppingCart
+
         public ActionResult Index()
         {
             var cartId = GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(cartId);
 
-            // Set up our ViewModel
+
             var viewModel = new ShoppingCartViewModel
             {
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal()
             };
 
-            // Return the view
+
             return View(viewModel);
         }
 
@@ -49,6 +49,38 @@ namespace CoffeeShop.WebUI.Controllers
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveFromCart(string id)
+        {
+   
+            var shoppingCartId = GetCardId(this.HttpContext);
+            var cart = shoppingCart.GetShoppingCart(shoppingCartId);
+
+
+            int itemCount = cart.RemoveFromCart(id);
+
+            var results = new ShoppingCartRemoveViewModel
+            {
+                Message = "Order has been removed from your shopping cart.",
+                CartTotal = cart.GetTotal(),
+                CartCount = cart.GetCount(),
+                ItemCount = itemCount,
+                DeleteId = id
+            };
+
+            return Json(results);
+        }
+
+        [ChildActionOnly]
+        public ActionResult CartSummary()
+        {
+            var shoppingCartId = GetCardId(this.HttpContext);
+            var cart = shoppingCart.GetShoppingCart(shoppingCartId);
+
+            ViewData["CartCount"] = cart.GetCount();
+            return PartialView("CartSummary");
         }
 
         private string GetCardId(HttpContextBase context)

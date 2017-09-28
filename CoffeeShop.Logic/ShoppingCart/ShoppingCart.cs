@@ -33,16 +33,16 @@ namespace CoffeeShop.Logic.ShoppingCart
             }
         }
 
-        void IShoppingCart.AddToCart(ICoffee orderedCofee)
+        public void AddToCart(ICoffee orderedCofee)
         {
-            // Get the matching cart and album instances
+            
             var isAvailable = cartRepository.IsCartItemAvailable(shoppingCartId, orderedCofee.Id);
 
             ICart cartItem;
 
             if (!isAvailable)
             {
-                // Create a new cart item if no cart item exists
+                
                 cartItem = cartFactory.CreateCart();
                 cartItem.CoffeeId = orderedCofee.Id;
                 cartItem.CoffeeDescription = orderedCofee.FullDescription;
@@ -55,17 +55,39 @@ namespace CoffeeShop.Logic.ShoppingCart
             else
             {
                 // Pls refactor
-                cartItem = cartRepository.GetCartItem(shoppingCartId, orderedCofee.Id);
-                // If the item does exist in the cart, then add one to the quantity
+                cartItem = cartRepository.GetCartItemByCoffeeId(shoppingCartId, orderedCofee.Id);
+               
                 cartItem.Count++;
-                // Save changes
+
                 cartRepository.Update(cartItem);
             }
 
 
         }
 
-        void RemoveFromCart() { }
+        public int RemoveFromCart(string coffeeId)
+        {
+
+            var cartItem = cartRepository.GetCartItemByCoffeeId(shoppingCartId, coffeeId);
+
+            int itemCount = 0;
+            if (cartItem == null)
+            {
+
+            }
+
+            if (cartItem.Count > 1)
+            {
+                cartItem.Count--;
+                itemCount = cartItem.Count;
+            }
+            else
+            {
+                cartRepository.Remove(cartItem);
+            }
+
+            return itemCount;
+        }
 
         public IEnumerable<ICart> GetCartItems()
         {
@@ -81,7 +103,12 @@ namespace CoffeeShop.Logic.ShoppingCart
 
         public decimal GetTotal()
         {
-            return 65;
+            return cartRepository.GetSum(this.shoppingCartId);
+        }
+
+        public int GetCount()
+        {
+            return cartRepository.GetCount(this.shoppingCartId);
         }
     }
 }

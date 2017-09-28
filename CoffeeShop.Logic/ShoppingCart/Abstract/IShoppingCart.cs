@@ -9,7 +9,9 @@ namespace CoffeeShop.Logic.ShoppingCart.Abstract
         IShoppingCart GetShoppingCart(string id);
 
         void AddToCart(ICoffee orderedCofee);
+        int RemoveFromCart(string coffeeId);
         IEnumerable<ICart> GetCartItems();
         decimal GetTotal();
+        int GetCount();
     }
 }

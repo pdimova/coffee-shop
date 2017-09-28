@@ -42,7 +42,7 @@ namespace CoffeeShop.WebUI.Controllers
             return View(orderWizardVM);
         }
 
-        [HttpPost]
+        [HttpPost] //AJAX
         public ActionResult Index(OrderWizardViewModel data)
         {
             if (ModelState.IsValid)

@@ -69,7 +69,22 @@ namespace CoffeeShop.Data
             }
         }
 
-        public ICart GetCartItem(string shoppingCartId, string coffeId)
+        public ICart GetCartItemByCartId(string shoppingCartId, int cartId)
+        {
+            var item = this.dbSet.Single(c => c.ShoppingCartId == shoppingCartId && c.CartId == cartId);
+
+            var cart = new Logic.Cart.Cart();
+
+            cart.CoffeeId = item.CoffeeId;
+            cart.CoffeeDescription = item.CoffeeDescription;
+            cart.CoffeeCost = item.CoffeeCost;
+            cart.Count = item.Count;
+            cart.ShoppingCartId = item.ShoppingCartId;
+
+            return cart;
+        }
+
+        public ICart GetCartItemByCoffeeId(string shoppingCartId, string coffeId)
         {
             var item = this.dbSet.Single(c => c.ShoppingCartId == shoppingCartId && c.CoffeeId == coffeId);
 
@@ -97,6 +112,25 @@ namespace CoffeeShop.Data
             this.dbSet.Add(item);
 
             this.context.SaveChanges();
+        }
+
+        public void Remove(ICart cartItem)
+        {
+            var carItem = this.dbSet.Single(c => c.ShoppingCartId == cartItem.ShoppingCartId && c.CoffeeId == cartItem.CoffeeId);
+            this.dbSet.Remove(carItem);
+            this.context.SaveChanges();
+        }
+
+        public decimal GetSum(string shoppingCartId)
+        {
+            decimal? total = this.dbSet.Where(c => c.ShoppingCartId == shoppingCartId).Select(c => c.CoffeeCost).Sum();
+
+            return total ?? decimal.Zero;
+        }
+
+        public int GetCount(string shoppingCartId)
+        {
+            return this.dbSet.Where(c => c.ShoppingCartId == shoppingCartId).Count();
         }
     }
 }
