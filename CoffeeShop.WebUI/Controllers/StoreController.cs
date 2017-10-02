@@ -12,10 +12,10 @@ namespace CoffeeShop.WebUI.Controllers
     public class StoreController : Controller
     {
         readonly IMenuProvider menuProvider;
-        readonly IOrderFactory orderFactory;
+        readonly IProcessingOrderFactory orderFactory;
         readonly ICoffeeStore store;
 
-        public StoreController(ICoffeeStore store, IMenuProvider menuProvider, IOrderFactory orderFactory)
+        public StoreController(ICoffeeStore store, IMenuProvider menuProvider, IProcessingOrderFactory orderFactory)
         {
             this.store = store;
             this.orderFactory = orderFactory;

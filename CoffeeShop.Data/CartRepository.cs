@@ -132,5 +132,17 @@ namespace CoffeeShop.Data
         {
             return this.dbSet.Where(c => c.ShoppingCartId == shoppingCartId).Count();
         }
+
+        public void Migrate(string shoppingCartId, string userName)
+        {
+            var shoppingCart = this.dbSet.Where(c => c.ShoppingCartId == shoppingCartId);
+
+            foreach (var item in shoppingCart)
+            {
+                item.ShoppingCartId = userName;
+            }
+
+            this.context.SaveChanges();
+        }
     }
 }

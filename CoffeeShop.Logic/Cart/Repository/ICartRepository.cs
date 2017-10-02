@@ -14,5 +14,6 @@ namespace CoffeeShop.Logic.Cart.Repository
         void Remove(ICart cartItem);
         decimal GetSum(string shoppingCartId);
         int GetCount(string shoppingCartId);
+        void Migrate(string shoppingCartId, string userName);
     }
 }

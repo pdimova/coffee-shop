@@ -1,13 +1,20 @@
-﻿namespace CoffeeShop.Logic.Order.Abstract
-{
-    using System.Collections.Generic;
+﻿using System;
 
+namespace CoffeeShop.Logic.Order.Abstract
+{
     public interface IOrder
     {
-        string SelectedCoffeeType { get; set; }
+        int OrderId { get; set; }
+        string Username { get; set; }
+        DateTime OrderDate { get; set; }
 
-        string SelectedCoffeeSize { get; set; }
-
-        ICollection<string> SelectedCoffeeCodimentsList { get; set; }
+        string FirstName { get; set; }
+        string LastName { get; set; }
+        string Address { get; set; }
+        string City { get; set; }
+        string PostalCode { get; set; }
+        string Phone { get; set; }
+        string Email { get; set; }
+        string Details { get; set; }
     }
 }

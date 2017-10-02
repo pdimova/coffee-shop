@@ -8,7 +8,7 @@
     <em>Review</em> your cart:
 </h3>
 <p class="button">
-    @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout")
+    @Html.ActionLink("Checkout >>", "Pay", "Checkout")
 </p>
 <div id="update-message">
 </div>
@@ -67,7 +67,7 @@
             // Handler for .ready() called.
             console.log(requester)
             $('.RemoveLink').on("click", function (e) {
-                
+
                 var recordToDelete = $(this).attr("data-id");
 
                 if (recordToDelete != '') {

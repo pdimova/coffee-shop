@@ -50,6 +50,8 @@
     <Compile Include="CartRepository.cs" />
     <Compile Include="CoffeeStoreDbContext.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,8 +10,9 @@ namespace CoffeeShop.WebUI.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCart shoppingCart;
+        private readonly CartIdentifier cardIdentifier;
 
-        public ShoppingCartController(IShoppingCart shoppingCart)
+        public ShoppingCartController(IShoppingCart shoppingCart, CartIdentifier cardIdentifier) // maybe shoppingCartFactory ??
         {
             if (shoppingCart == null)
             {
@@ -19,12 +20,13 @@ namespace CoffeeShop.WebUI.Controllers
             }
 
             this.shoppingCart = shoppingCart;
+            this.cardIdentifier = cardIdentifier;
         }
 
 
         public ActionResult Index()
         {
-            var cartId = GetCardId(this.HttpContext);
+            var cartId = cardIdentifier.GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(cartId);
 
 
@@ -42,7 +44,7 @@ namespace CoffeeShop.WebUI.Controllers
         {
             var oderedCoffee = TempData["order"] as ICoffee; // so wrong
 
-            string cartId = GetCardId(this.HttpContext);
+            string cartId = cardIdentifier.GetCardId(this.HttpContext);
 
             var cart = shoppingCart.GetShoppingCart(cartId);
             cart.AddToCart(oderedCoffee);
@@ -54,8 +56,8 @@ namespace CoffeeShop.WebUI.Controllers
         [HttpPost]
         public ActionResult RemoveFromCart(string id)
         {
-   
-            var shoppingCartId = GetCardId(this.HttpContext);
+
+            var shoppingCartId = cardIdentifier.GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(shoppingCartId);
 
 
@@ -76,30 +78,14 @@ namespace CoffeeShop.WebUI.Controllers
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
-            var shoppingCartId = GetCardId(this.HttpContext);
+            var shoppingCartId = cardIdentifier.GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(shoppingCartId);
 
             ViewData["CartCount"] = cart.GetCount();
+
             return PartialView("CartSummary");
         }
 
-        private string GetCardId(HttpContextBase context)
-        {
-            if (context.Session["CartId"] == null)
-            {
-                if (!string.IsNullOrWhiteSpace(context.User.Identity.Name))
-                {
-                    context.Session["CartId"] = context.User.Identity.Name;
-                }
-                else
-                {
-                    // Generate a new random GUID using System.Guid class
-                    Guid tempCartId = Guid.NewGuid();
-                    // Send tempCartId back to client as a cookie
-                    context.Session["CartId"] = tempCartId.ToString();
-                }
-            }
-            return context.Session["CartId"].ToString();
-        }
+
     }
 }

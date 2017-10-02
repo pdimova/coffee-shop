@@ -5,7 +5,8 @@ using CoffeeShop.Logic.Coffee.Abstract;
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using CoffeeShop.Logic.Order.Abstract;
+using CoffeeShop.Logic.Order.Repository;
 
 namespace CoffeeShop.Logic.ShoppingCart
 {
@@ -13,13 +14,14 @@ namespace CoffeeShop.Logic.ShoppingCart
     {
         private readonly ICartRepository cartRepository;
         private readonly ICartFactory cartFactory;
-
+        private readonly IOrderRepository orderRepository;
         private string shoppingCartId;
 
-        public ShoppingCart(ICartRepository cartRepository, ICartFactory cartFactory)
+        public ShoppingCart(ICartRepository cartRepository, ICartFactory cartFactory, IOrderRepository orderRepository)
         {
             this.cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
             this.cartFactory = cartFactory;
+            this.orderRepository = orderRepository;
         }
 
         public string ShoppingCartId
@@ -35,14 +37,14 @@ namespace CoffeeShop.Logic.ShoppingCart
 
         public void AddToCart(ICoffee orderedCofee)
         {
-            
+
             var isAvailable = cartRepository.IsCartItemAvailable(shoppingCartId, orderedCofee.Id);
 
             ICart cartItem;
 
             if (!isAvailable)
             {
-                
+
                 cartItem = cartFactory.CreateCart();
                 cartItem.CoffeeId = orderedCofee.Id;
                 cartItem.CoffeeDescription = orderedCofee.FullDescription;
@@ -56,7 +58,7 @@ namespace CoffeeShop.Logic.ShoppingCart
             {
                 // Pls refactor
                 cartItem = cartRepository.GetCartItemByCoffeeId(shoppingCartId, orderedCofee.Id);
-               
+
                 cartItem.Count++;
 
                 cartRepository.Update(cartItem);
@@ -109,6 +111,22 @@ namespace CoffeeShop.Logic.ShoppingCart
         public int GetCount()
         {
             return cartRepository.GetCount(this.shoppingCartId);
+        }
+
+        public int SaveOrder(IOrder order)
+        {
+            return this.orderRepository.AddOrder(order);
+        }
+
+        public bool ValidateOrder(int id, string name)
+        {
+            //TODO
+            return true;
+        }
+
+        public void MigrateCart(string userName)
+        {
+            cartRepository.Migrate(this.shoppingCartId, userName);
         }
     }
 }

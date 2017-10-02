@@ -5,6 +5,6 @@
 
     public interface ICoffeeStore
     {
-        ICoffee ProcessOrder(IOrder order);
+        ICoffee ProcessOrder(IProcessingOrder order);
     }
 }

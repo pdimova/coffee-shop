@@ -12,7 +12,7 @@
         private readonly IDictionary<string, Func<CoffeSizeType, ICoffee>> strategies;
 
         public SofiaCoffeeStore(
-            IProcessedOrderFactory processedOrderFactory,
+            IOrderFactory processedOrderFactory,
             IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies,
             IDictionary<string, Func<CoffeSizeType, ICoffee>> strategies)
             : base(processedOrderFactory, condimentsStrategies)

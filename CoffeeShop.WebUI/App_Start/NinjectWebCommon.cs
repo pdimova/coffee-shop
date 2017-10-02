@@ -21,11 +21,13 @@ namespace CoffeeShop.WebUI.App_Start
     using Ninject.Extensions.Factory;
     using Ninject.Web.Common;
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Web;
     using CoffeeShop.Logic.Cart.Repository;
     using CoffeeShop.Data;
+    using CoffeeShop.Logic.Order.Repository;
+    using CoffeeShop.Logic.ShoppingCart.Abstract;
+    using CoffeeShop.Logic.ShoppingCart;
 
     public static class NinjectWebCommon
     {
@@ -80,7 +82,9 @@ namespace CoffeeShop.WebUI.App_Start
             kernel.Bind(x => x
              .FromAssemblyContaining<ICoffee>()
              .SelectAllClasses()
-             .Excluding<ICoffee>()
+             .Excluding(new Type[] { typeof(ShoppingCart), typeof(Coffee) })
+             //.Excluding<IShoppingCart>()
+             //.Excluding<ICoffee>()
              .BindAllInterfaces());
 
             kernel.Bind(x => x
@@ -89,14 +93,12 @@ namespace CoffeeShop.WebUI.App_Start
             .EndingWith("Factory")
             .BindToFactory());
 
-            //kernel.Bind(x => x
-            //.FromAssemblyContaining<IStore>()
-            //.SelectAllClasses()
-            //.InheritedFrom<IStore>()
-            //.BindAllInterfaces()
-            //.Configure((b, comp) => b.Named(comp.Name)));
-
             kernel.Bind<ICartRepository>().To<CartRepository>();
+            kernel.Bind<IOrderRepository>().To<OrderRepository>();
+
+            kernel.Bind<IShoppingCart>().To<ShoppingCart>().InSingletonScope();
+
+            kernel.Bind<CartIdentifier>().ToSelf();
 
             kernel.Bind<ICoffee>().To<Americano>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetAmericano(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Cappuccino>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetCappucino(default(CoffeSizeType)));
@@ -141,20 +143,28 @@ namespace CoffeeShop.WebUI.App_Start
 
             kernel.Bind<IDictionary<string, Func<CoffeSizeType, ICoffee>>>().ToConstant(sofiaStoreStrategies)
                 .WhenInjectedInto<SofiaCoffeeStore>();
+
             kernel.Bind<IDictionary<string, Func<CoffeSizeType, ICoffee>>>().ToConstant(plovdivStoreStrategies)
                 .WhenInjectedInto<PlovdivCoffeeStore>();
+
             kernel.Bind<IDictionary<string, Func<ICoffee, ICoffee>>>().ToConstant(condimentsStrategies)
-                    .WhenInjectedInto<CoffeeStore>();
+                .WhenInjectedInto<CoffeeStore>();
 
             kernel.Bind<ICoffeeStore>().To<SofiaCoffeeStore>()
-                .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Sofia")).InSingletonScope();
+                .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Sofia"))
+                .InSingletonScope();
+
             kernel.Bind<IMenuProvider>().To<SofiaMenuProvider>()
-    .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Sofia")).InSingletonScope();
+                .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Sofia"))
+                .InSingletonScope();
 
             kernel.Bind<ICoffeeStore>().To<PlovdivCoffeeStore>()
-                .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv")).InSingletonScope();
+                .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
+                .InSingletonScope();
+
             kernel.Bind<IMenuProvider>().To<PlovdivMenuProvider>()
-     .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv")).InSingletonScope();
+                .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
+                .InSingletonScope();
 
         }
     }

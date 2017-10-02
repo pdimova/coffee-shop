@@ -1,0 +1,10 @@
+﻿@model int
+@{
+    ViewBag.Title = "Checkout Complete";
+}
+<h2>Checkout Complete</h2>
+<p>Thanks for your order! Your order number is: @Model</p>
+<p>
+    How about shopping for some more
+    @Html.ActionLink("Back to store", "Index", "Store", new { city = "Sofia" }, new { @class = "btn btn-default", role = "button" })
+</p>

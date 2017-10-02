@@ -17,27 +17,27 @@
         public void OrderClass_ShouldImplementIOrderInterface()
         {
             // Arrange & Act
-            var order = new Order();
+            var order = new ProcessingOrder();
 
             // Assert
-            Assert.That(order, Is.InstanceOf<IOrder>());
+            Assert.That(order, Is.InstanceOf<IProcessingOrder>());
         }
 
         [Test]
         public void OrderClass_DefaultCountructor_ShouldInitializeObjectCorrectly()
         {
             // Arrange & Act
-            var order = new Order();
+            var order = new ProcessingOrder();
 
             // Assert
-            Assert.That(order, Is.InstanceOf<Order>());
+            Assert.That(order, Is.InstanceOf<ProcessingOrder>());
         }
 
         [Test]
         public void OrderClass_SelectedCoffeeTypeProperty_ShouldExists()
         {
             // Arrange & Act
-            var order = new Order();
+            var order = new ProcessingOrder();
 
             // Assert
             Assert.That(order, Has.Property("SelectedCoffeeType"));
@@ -48,7 +48,7 @@
         {
             // Arrange & Act
             var coffeeType = "Espresso";
-            var order = new Order();
+            var order = new ProcessingOrder();
             order.SelectedCoffeeType = coffeeType;
 
             // Assert
@@ -60,7 +60,7 @@
         public void OrderClass_SelectedCoffeeSizeProperty_ShouldExists()
         {
             // Arrange & Act
-            var order = new Order();
+            var order = new ProcessingOrder();
 
             // Assert
             Assert.That(order, Has.Property("SelectedCoffeeSize"));
@@ -71,7 +71,7 @@
         {
             // Arrange & Act
             var coffeeSize = "Grande";
-            var order = new Order();
+            var order = new ProcessingOrder();
             order.SelectedCoffeeSize = coffeeSize;
 
             // Assert
@@ -83,7 +83,7 @@
         public void OrderClass_SelectedCoffeeCodimentsListProperty_ShouldExists()
         {
             // Arrange & Act
-            var order = new Order();
+            var order = new ProcessingOrder();
 
             // Assert
             Assert.That(order, Has.Property("SelectedCoffeeCodimentsList"));
@@ -94,7 +94,7 @@
         {
             // Arrange & Act
             var condimentsList = new List<string> { "Milk", "Honey" };
-            var order = new Order();
+            var order = new ProcessingOrder();
             order.SelectedCoffeeCodimentsList = condimentsList;
 
             // Assert

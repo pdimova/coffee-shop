@@ -66,12 +66,13 @@
     <Compile Include="Menu\Abstract\IMenuProvider.cs" />
     <Compile Include="Menu\PlovdivMenuProvider.cs" />
     <Compile Include="Menu\SofiaMenuProvider.cs" />
-    <Compile Include="Order\Factory\IProcessedOrderFactory.cs" />
-    <Compile Include="Order\Abstract\IOrder.cs" />
     <Compile Include="Order\Factory\IOrderFactory.cs" />
-    <Compile Include="Order\Abstract\IProcessedOrder.cs" />
+    <Compile Include="Order\Abstract\IProcessingOrder.cs" />
+    <Compile Include="Order\Factory\IProcessingOrderFactory.cs" />
+    <Compile Include="Order\Abstract\IOrder.cs" />
+    <Compile Include="Order\ProcessingOrder.cs" />
     <Compile Include="Order\Order.cs" />
-    <Compile Include="Order\ProcessedOrder.cs" />
+    <Compile Include="Order\Repository\IOrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart\Abstract\IShoppingCart.cs" />
     <Compile Include="ShoppingCart\ShoppingCart.cs" />
@@ -80,9 +81,7 @@
     <Compile Include="Stores\PlovdivCoffeeStore.cs" />
     <Compile Include="Stores\SofiaCoffeeStore.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ShoppingCart\Factory\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

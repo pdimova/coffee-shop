@@ -1,13 +1,17 @@
-﻿namespace CoffeeShop.Logic.Order
-{
-    using System;
-    using Abstract;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    public class Order : IOrder
+namespace CoffeeShop.Data.Models
+{
+    public class Order
     {
-        public int  OrderId { get; set; }
+        public int OrderId { get; set; }
+
         public string Username { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime DateCreated { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }

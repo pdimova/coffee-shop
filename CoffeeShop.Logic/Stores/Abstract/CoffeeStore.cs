@@ -9,11 +9,11 @@
 
     public abstract class CoffeeStore : ICoffeeStore
     {
-        private readonly IProcessedOrderFactory processedOrderFactory;
+        private readonly IOrderFactory processedOrderFactory;
         private readonly IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies;
 
         public CoffeeStore(
-            IProcessedOrderFactory processedOrderFactory,
+            IOrderFactory processedOrderFactory,
             IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies)
         {
             if (condimentsStrategies == null)
@@ -30,7 +30,7 @@
             this.condimentsStrategies = condimentsStrategies;
         }
 
-        public ICoffee ProcessOrder(IOrder order)
+        public ICoffee ProcessOrder(IProcessingOrder order)
 
         {
             ICoffee coffee;
