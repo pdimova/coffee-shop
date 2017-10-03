@@ -11,6 +11,7 @@
 
 </head>
 <body>
+
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -30,21 +31,26 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
+
         <footer>
             @if (IsSectionDefined("Footer"))
             {
                 @RenderSection("Footer");
-             //<footer>@RenderSection("Footer", required: false)</footer>
+                //<footer>@RenderSection("Footer", required: false)</footer>
 
             }
             else
             {
-                <span>This is the default footer.</span>
+                <hr />
+                @*<div class="row">
+                    <div class="col-md-12">
+                        <section class="bottom"></section>
+                    </div>
+                </div>*@
             }
         </footer>
     </div>

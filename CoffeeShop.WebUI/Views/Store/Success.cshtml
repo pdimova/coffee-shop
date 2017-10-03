@@ -1,10 +1,18 @@
 ﻿@model CoffeeShop.WebUI.ViewModels.Store.FinalOrderViewModel
 
-<h3>Bravo</h3>
+@{
+    ViewBag.Title = "Successful Order";
+}
 
-@Html.DisplayFor(m => m.FullDescription)
-@Html.DisplayFor(m => m.Price)
+<div class="row">
+    <div class="col-md-6">
+        <h3>Bravo!</h3>
 
-@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart")
+        @Html.DisplayFor(m => m.FullDescription) - @Html.DisplayFor(m => m.Price)
 
-@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { @class = "btn btn-default", role = "button" })
+        <br />
+        <br />
+
+        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", "", new { @class = "btn btn-warning", role = "button" })
+    </div>
+</div>

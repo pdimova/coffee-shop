@@ -1,68 +1,73 @@
 ﻿@model CoffeeShop.WebUI.ViewModels.ShoppingCart.ShoppingCartViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Shopping Cart";
 }
 
-<h3>
-    <em>Review</em> your cart:
-</h3>
-<p class="button">
-    @Html.ActionLink("Checkout >>", "Pay", "Checkout")
-</p>
-<div id="update-message">
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>
+            <em>Review</em> your cart:
+        </h3>
+
+        <br />
+        <br />
+
+        <div id="update-message"></div>
+
+        <table>
+            <tr>
+                <th>
+                    Order
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.CartItems)
+            {
+                <tr id="row-@item.CoffeeId">
+                    <td>
+                        @item.CoffeeDescription
+                    </td>
+                    <td>
+                        @item.CoffeeCost
+                    </td>
+                    <td id="item-count-@item.CoffeeId">
+                        @item.Count
+                    </td>
+                    <td>
+                        <a href="#" class="RemoveLink btn btn-danger" data-id="@item.CoffeeId" role="button">X</a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3">
+                    <strong>Total</strong>
+                </td>
+                <td id="cart-total">
+                    <strong>@Model.CartTotal</strong>
+                </td>
+            </tr>
+        </table>
+
+        <br />
+        @Html.ActionLink("Go for some more", "Index", "Store", new { city = ViewBag.City }, new { @class = "btn btn-warning", role = "button" })
+        @Html.ActionLink("Checkout >>", "Pay", "Checkout", "", new { @class = "btn btn-warning", role = "button" })
+    </div>
 </div>
-<table>
-    <tr>
-        <th>
-            Order
-        </th>
-        <th>
-            Price (each)
-        </th>
-        <th>
-            Quantity
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.CartItems)
-    {
-        <tr id="row-@item.CoffeeId">
-            <td>
-                @item.CoffeeDescription
-            </td>
-            <td>
-                @item.CoffeeCost
-            </td>
-            <td id="item-count-@item.CoffeeId">
-                @item.Count
-            </td>
-            <td>
-                <a href="#" class="RemoveLink" data-id="@item.CoffeeId">
-                    Remove from cart
-                </a>
-            </td>
-        </tr>
-    }
-    <tr>
-        <td>
-            Total
-        </td>
-        <td></td>
-        <td></td>
-        <td id="cart-total">
-            @Model.CartTotal
-        </td>
-    </tr>
-</table>
 
 @section Scripts {
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/App/requester.js"></script>
 
     <script type="text/javascript">
-
-
         $(function () {
             // Handler for .ready() called.
             console.log(requester)
@@ -85,11 +90,9 @@
                             $('#cart-total').text(data.CartTotal);
                             $('#update-message').text(data.Message);
                             $('#cart-status').text('Cart (' + data.CartCount + ')');
-
                         });
                 }
             })
         });
-
     </script>
 }

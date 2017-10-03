@@ -2,9 +2,6 @@
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using CoffeeShop.WebUI.ViewModels.Checkout;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CoffeeShop.WebUI.Controllers
@@ -17,11 +14,20 @@ namespace CoffeeShop.WebUI.Controllers
 
         public CheckoutController(IShoppingCart shoppingCart, IOrderFactory orderFactory)
         {
+            if (shoppingCart == null)
+            {
+                throw new ArgumentNullException(nameof(shoppingCart));
+            }
+
+            if (orderFactory == null)
+            {
+                throw new ArgumentNullException(nameof(orderFactory));
+            }
+
             this.shoppingCart = shoppingCart;
             this.orderFactory = orderFactory;
         }
 
-        // GET: Checkout
         public ActionResult Pay()
         {
             var model = new PaymentAddressViewModel();
@@ -33,7 +39,6 @@ namespace CoffeeShop.WebUI.Controllers
         [HttpPost]
         public ActionResult Pay(PaymentAddressViewModel form)
         {
-            TryValidateModel(form);
 
             if (ModelState.IsValid)
             {

@@ -9,7 +9,6 @@ namespace CoffeeShop.WebUI.App_Start
     using Logic.Coffee.CoffeeTypes.Factory;
     using Logic.Coffee.CoffeeTypes.PlovdivStoreSpecialTypes;
     using Logic.Coffee.CoffeeTypes.SofiaStoreSpecialTypes;
-    using Logic.Coffee.Condimets;
     using Logic.Coffee.CondimetsDecorators.Factory;
     using Logic.Menu;
     using Logic.Menu.Abstract;
@@ -23,11 +22,12 @@ namespace CoffeeShop.WebUI.App_Start
     using System;
     using System.Collections.Generic;
     using System.Web;
+    using Data;
+    using Logic.Order.Repository;
+    using Logic.ShoppingCart.Abstract;
+    using Logic.ShoppingCart;
     using CoffeeShop.Logic.Cart.Repository;
-    using CoffeeShop.Data;
-    using CoffeeShop.Logic.Order.Repository;
-    using CoffeeShop.Logic.ShoppingCart.Abstract;
-    using CoffeeShop.Logic.ShoppingCart;
+    using CoffeeShop.Logic.Coffee.Condiments;
 
     public static class NinjectWebCommon
     {
@@ -83,8 +83,6 @@ namespace CoffeeShop.WebUI.App_Start
              .FromAssemblyContaining<ICoffee>()
              .SelectAllClasses()
              .Excluding(new Type[] { typeof(ShoppingCart), typeof(Coffee) })
-             //.Excluding<IShoppingCart>()
-             //.Excluding<ICoffee>()
              .BindAllInterfaces());
 
             kernel.Bind(x => x
@@ -113,6 +111,7 @@ namespace CoffeeShop.WebUI.App_Start
             kernel.Bind<ICoffee>().To<Milk>().NamedLikeFactoryMethod((ICondimentsFactory f) => f.GetMilk(default(ICoffee)));
             kernel.Bind<ICoffee>().To<WhippedCream>().NamedLikeFactoryMethod((ICondimentsFactory f) => f.GetWhippedCream(default(ICoffee)));
 
+
             var sofiaStoreStrategies = new Dictionary<string, Func<CoffeSizeType, ICoffee>>
             {
                 { "Americano", kernel.Get<ICoffeeTypeFactory>().GetAmericano },
@@ -137,9 +136,8 @@ namespace CoffeeShop.WebUI.App_Start
                 { "Caramel", kernel.Get<ICondimentsFactory>().GetCaramel },
                 { "Chocolate", kernel.Get<ICondimentsFactory>().GetChocolate },
                 { "Cinnamon", kernel.Get<ICondimentsFactory>().GetCinnamon },
-                { "Whipped cream", kernel.Get<ICondimentsFactory>().GetWhippedCream },
+                { "WhippedCream", kernel.Get<ICondimentsFactory>().GetWhippedCream },
             };
-
 
             kernel.Bind<IDictionary<string, Func<CoffeSizeType, ICoffee>>>().ToConstant(sofiaStoreStrategies)
                 .WhenInjectedInto<SofiaCoffeeStore>();
@@ -165,7 +163,6 @@ namespace CoffeeShop.WebUI.App_Start
             kernel.Bind<IMenuProvider>().To<PlovdivMenuProvider>()
                 .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
                 .InSingletonScope();
-
         }
     }
 }

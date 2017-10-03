@@ -2,9 +2,17 @@
 @{
     ViewBag.Title = "Checkout Complete";
 }
-<h2>Checkout Complete</h2>
-<p>Thanks for your order! Your order number is: @Model</p>
-<p>
-    How about shopping for some more
-    @Html.ActionLink("Back to store", "Index", "Store", new { city = "Sofia" }, new { @class = "btn btn-default", role = "button" })
-</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Checkout Complete</h2>
+
+        <br />
+
+        <p>Thanks for your order! Your order number is: @Model</p>
+        <p>
+            How about shopping for some more
+            @Html.ActionLink("Back to store", "Index", "Store", new { city = "Sofia" }, new { @class = "btn btn-warning", role = "button" })
+        </p>
+    </div>
+</div>

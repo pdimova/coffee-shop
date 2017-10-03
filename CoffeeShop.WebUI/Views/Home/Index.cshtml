@@ -17,19 +17,19 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row buttons">
     <div class="col-md-6">
         <div class="col-md-offset-5">
-            @Html.ActionLink("Sofia", "Index", "Store", new { city = "Sofia" }, new { @class = "btn btn-default", role = "button" })
+            @Html.ActionLink("Sofia", "Index", "Store", new { city = "Sofia" }, new { @class = "btn btn-warning", role = "button" })
         </div>
     </div>
     <div class="col-md-6">
         <div class="col-md-offset-5">
-            @Html.ActionLink("Plovdiv", "Index", "Store", new { city = "Plovdiv" }, new { @class = "btn btn-default", role = "button" })
+            @Html.ActionLink("Plovdiv", "Index", "Store", new { city = "Plovdiv" }, new { @class = "btn btn-warning", role = "button" })
         </div>
     </div>
 </div>
 
 @section Footer {
-    This is the <strong>footer</strong>.
+    @*This is <strong>custom</strong> footer.*@
 }

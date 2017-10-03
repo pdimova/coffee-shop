@@ -6,17 +6,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System;
 
 namespace CoffeeShop.WebUI.Controllers
 {
     public class StoreController : Controller
     {
-        readonly IMenuProvider menuProvider;
-        readonly IProcessingOrderFactory orderFactory;
-        readonly ICoffeeStore store;
+        private readonly IMenuProvider menuProvider;
+        private readonly IProcessingOrderFactory orderFactory;
+        private readonly ICoffeeStore store;
 
-        public StoreController(ICoffeeStore store, IMenuProvider menuProvider, IProcessingOrderFactory orderFactory)
+        public StoreController(
+            ICoffeeStore store,
+            IMenuProvider menuProvider,
+            IProcessingOrderFactory orderFactory)
         {
+            if (store==null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (menuProvider == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (orderFactory == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.store = store;
             this.orderFactory = orderFactory;
             this.menuProvider = menuProvider;
@@ -24,7 +41,8 @@ namespace CoffeeShop.WebUI.Controllers
 
         public ActionResult Index(string city)
         {
-            city = HttpUtility.HtmlEncode(city); // sanitize the user input if such
+            city = HttpUtility.HtmlEncode(city);
+            TempData["City"] = city;
 
             OrderWizardViewModel orderWizardVM = new OrderWizardViewModel();
             orderWizardVM.CoffeeTypes = this.menuProvider.GetCoffeeTypes();
@@ -53,7 +71,7 @@ namespace CoffeeShop.WebUI.Controllers
                 order.SelectedCoffeeCodimentsList = data.CoffeeCondiments.Where(c => c.Value == true).Select(c => c.Key).ToList();
 
                 var coffee = this.store.ProcessOrder(order);
-                TempData["order"] = coffee;
+                TempData["Order"] = coffee;
 
                 FinalOrderViewModel finalOrderViewModel = new FinalOrderViewModel();
                 finalOrderViewModel.FullDescription = coffee.FullDescription;

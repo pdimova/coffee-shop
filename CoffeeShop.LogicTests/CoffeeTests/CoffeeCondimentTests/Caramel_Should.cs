@@ -1,14 +1,9 @@
 ﻿namespace CoffeeShop.LogicTests.CoffeeTests.CoffeeCondimentTests
 {
+    using CoffeeShop.Logic.Coffee.Condiments;
     using Logic.Coffee.Abstract;
-    using Logic.Coffee.Condimets;
     using Moq;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class Caramel_Should

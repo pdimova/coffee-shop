@@ -2,7 +2,6 @@
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using CoffeeShop.WebUI.ViewModels.ShoppingCart;
 using System;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CoffeeShop.WebUI.Controllers
@@ -12,54 +11,53 @@ namespace CoffeeShop.WebUI.Controllers
         private readonly IShoppingCart shoppingCart;
         private readonly CartIdentifier cardIdentifier;
 
-        public ShoppingCartController(IShoppingCart shoppingCart, CartIdentifier cardIdentifier) // maybe shoppingCartFactory ??
+        public ShoppingCartController(IShoppingCart shoppingCart, CartIdentifier cardIdentifier)
         {
             if (shoppingCart == null)
             {
                 throw new ArgumentNullException(nameof(shoppingCart));
             }
 
+            if (cardIdentifier == null)
+            {
+                throw new ArgumentNullException(nameof(cardIdentifier));
+            }
+
             this.shoppingCart = shoppingCart;
             this.cardIdentifier = cardIdentifier;
         }
-
 
         public ActionResult Index()
         {
             var cartId = cardIdentifier.GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(cartId);
 
+            var viewModel = new ShoppingCartViewModel();
+            viewModel.CartItems = cart.GetCartItems();
+            viewModel.CartTotal = cart.GetTotal();
 
-            var viewModel = new ShoppingCartViewModel
-            {
-                CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
-            };
-
+            ViewBag.City = TempData["City"];
 
             return View(viewModel);
         }
 
         public ActionResult AddToCart()
         {
-            var oderedCoffee = TempData["order"] as ICoffee; // so wrong
+            var oderedCoffee = TempData["Order"] as ICoffee; // so wrong
 
             string cartId = cardIdentifier.GetCardId(this.HttpContext);
-
             var cart = shoppingCart.GetShoppingCart(cartId);
+
             cart.AddToCart(oderedCoffee);
 
-            // Go back to the main store page for more shopping
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        [HttpPost] // AJAX
         public ActionResult RemoveFromCart(string id)
         {
-
             var shoppingCartId = cardIdentifier.GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(shoppingCartId);
-
 
             int itemCount = cart.RemoveFromCart(id);
 
@@ -85,7 +83,5 @@ namespace CoffeeShop.WebUI.Controllers
 
             return PartialView("CartSummary");
         }
-
-
     }
 }

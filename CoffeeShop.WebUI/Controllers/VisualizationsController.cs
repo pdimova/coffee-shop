@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace CoffeeShop.WebUI.Controllers
 {
     public class VisualizationsController : Controller
     {
-        // GET: Visualizations
+
         public ActionResult ShowCoffeeType(string coffeetype)
         {
             var cf = coffeetype.ToLower();
@@ -17,9 +13,9 @@ namespace CoffeeShop.WebUI.Controllers
 
         public ActionResult ShowCoffeeSize(string coffeesize, string coffeetype)
         {
-            var zt = coffeesize.ToLower();
+            var cz = coffeesize.ToLower();
             var cf = coffeetype.ToLower();
-            string[] param = { zt, cf };
+            string[] param = { cz, cf };
             return PartialView("ShowCoffeeSize", param);
         }
 
@@ -28,6 +24,5 @@ namespace CoffeeShop.WebUI.Controllers
             var con = condiment.ToLower();
             return PartialView("ShowCondiment", con);
         }
-
     }
 }

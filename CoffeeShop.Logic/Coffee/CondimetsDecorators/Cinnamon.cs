@@ -1,4 +1,4 @@
-﻿namespace CoffeeShop.Logic.Coffee.Condimets
+﻿namespace CoffeeShop.Logic.Coffee.Condiments
 {
     using System;
     using Abstract;

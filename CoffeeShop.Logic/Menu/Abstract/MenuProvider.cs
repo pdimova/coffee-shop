@@ -29,7 +29,7 @@
 
         public IEnumerable<string> GetCoffeeCondiments()
         {
-            return this.GetNames("CoffeeShop.Logic.Coffee.Condimets");
+            return this.GetNames("CoffeeShop.Logic.Coffee.Condiments");
         }
 
         private IEnumerable<string> GetNames(string fullNamespace)

@@ -23,6 +23,12 @@ textarea {
     max-width: 280px;
 }*/
 
+body {
+    background-color: black;
+    color: white;
+}
+
+
 /*    navigation    */
 .navbar-default {
     background: #fff;
@@ -41,7 +47,7 @@ textarea {
         padding: 20px 20px 40px 20px;
     }
 
-        .navbar-default .navbar-brand:hover {
+    .navbar-default .navbar-brand:hover {
             background: #f2af00;
         }
 
@@ -68,19 +74,19 @@ textarea {
         padding-top: 30px;
     }
 
-        .navbar-default .navbar-toggle .icon-bar {
+    .navbar-default .navbar-toggle .icon-bar {
             background: #dc5034;
             border-color: transparent;
         }
 
-        .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
             background-color: transparent;
         }
 
 /*    hero    */
 .top {
     width: 100%;
-    height: 570px;
+    height: 510px;
     position: relative;
     background: url('../img/top.jpg') no-repeat;
     background-size: cover;
@@ -135,6 +141,10 @@ textarea {
         }
 
 
+.buttons {
+    margin-top: 20px;
+}
+
 input[type="radio"], input[type="checkbox"] {
     visibility: hidden;
 }
@@ -150,3 +160,15 @@ input[type="radio"]:checked + label {
 input[type="checkbox"]:checked + label {
     background: green;
 }
+
+/*.bottom {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background: url('../img/bottom.jpg') no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    overflow: hidden;
+}*/
