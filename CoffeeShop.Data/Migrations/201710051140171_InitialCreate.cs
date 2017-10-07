@@ -1,12 +1,44 @@
-namespace CoffeeShop.WebUI.Migrations
+namespace CoffeeShop.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Carts",
+                c => new
+                    {
+                        CartId = c.Int(nullable: false, identity: true),
+                        ShoppingCartId = c.String(),
+                        CoffeeId = c.String(),
+                        CoffeeDescription = c.String(),
+                        CoffeeCost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Count = c.Int(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.CartId);
+            
+            CreateTable(
+                "dbo.Orders",
+                c => new
+                    {
+                        OrderId = c.Int(nullable: false, identity: true),
+                        Username = c.String(),
+                        DateCreated = c.DateTime(nullable: false),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        Address = c.String(),
+                        City = c.String(),
+                        PostalCode = c.String(),
+                        Phone = c.String(),
+                        Email = c.String(),
+                        Details = c.String(),
+                    })
+                .PrimaryKey(t => t.OrderId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -94,6 +126,8 @@ namespace CoffeeShop.WebUI.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Orders");
+            DropTable("dbo.Carts");
         }
     }
 }

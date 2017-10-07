@@ -1,4 +1,5 @@
-﻿@model CoffeeShop.WebUI.ViewModels.Store.OrderWizardViewModel
+﻿@using CoffeeShop.WebUI.ViewModels.Store
+@model OrderWizardViewModel
 
 @{
     ViewBag.Title = ViewBag.City;
@@ -13,66 +14,66 @@
     <div class="col-md-6" id="coffee-order">
         @using (Ajax.BeginForm("Index", "Store", new { city = ViewBag.City }, options))
         {
-            <div id="divCoffeeType">
-                <h2>Step 1: Choose your favourite coffee flavour</h2>
-                @{int counter = 0;
+        <div id="divCoffeeType">
+            <h2>Step 1: Choose your favourite coffee flavour</h2>
+            @{int counter = 0;
 
                     foreach (var coffeeType in Model.CoffeeTypes)
                     {
                         string tagID = "radio" + counter;
 
-                        @Html.RadioButtonFor(m => m.SelectedCoffeeType, coffeeType, new { id = tagID, @class = "coffee-options" })
+                @Html.RadioButtonFor(m => m.SelectedCoffeeType, coffeeType, new { id = tagID, @class = "coffee-options" })
 
-                        <label for=@tagID>@coffeeType</label>
-                        <br />
+                <label for=@tagID>@coffeeType</label>
+                <br />
                         counter++;
                     }
-                }
-                <br />
-                <input type="button" name="nextBtn" value="Next" class="btn btn-warning" role="button" />
-            </div>
-            <div id="divCoffeeSize">
-                <h1>Step 2: Choose how big your coffee cup is</h1>
+            }
+            <br />
+            <input type="button" name="nextBtn" value="Next" class="btn btn-warning" role="button" />
+        </div>
+        <div id="divCoffeeSize">
+            <h1>Step 2: Choose how big your coffee cup is</h1>
 
-                @{ int counter2 = 0;
+            @{ int counter2 = 0;
 
                     foreach (var coffeeSize in Model.CoffeeSizes)
                     {
                         string tagID = "alabala" + counter2;
 
-                        @Html.RadioButtonFor(m => m.SelectedCoffeeSize, coffeeSize, new { id = tagID, @class = "size-options" })
+                @Html.RadioButtonFor(m => m.SelectedCoffeeSize, coffeeSize, new { id = tagID, @class = "size-options" })
 
-                        <label for=@tagID>@coffeeSize</label>
-                        <br />
+                <label for=@tagID>@coffeeSize</label>
+                <br />
                         counter2++;
                     }
-                }
-                <br />
-                <input type="button" name="prevBtn" value="Previous" class="btn btn-warning" role="button" />
-                <input type="button" name="nextBtn" value="Next" class="btn btn-warning" role="button" />
-            </div>
-            <div id="divCoffeeCondiments">
-                <h1>Step 3: Make it special</h1>
+            }
+            <br />
+            <input type="button" name="prevBtn" value="Previous" class="btn btn-warning" role="button" />
+            <input type="button" name="nextBtn" value="Next" class="btn btn-warning" role="button" />
+        </div>
+        <div id="divCoffeeCondiments">
+            <h1>Step 3: Make it special</h1>
 
-                @{int counter3 = 0;
+            @{int counter3 = 0;
 
                     foreach (var coffeCondiment in Model.CoffeeCondiments)
                     {
                         string tagID = "check" + counter3;
-                        @Html.CheckBoxFor(m => m.CoffeeCondiments[coffeCondiment.Key], new { id = tagID, @class = "condiment-options", data_condiment = @coffeCondiment.Key })
+                @Html.CheckBoxFor(m => m.CoffeeCondiments[coffeCondiment.Key], new { id = tagID, @class = "condiment-options", data_condiment = @coffeCondiment.Key })
 
-                        <label for=@tagID>@coffeCondiment.Key</label>
-                        <br />
+                <label for=@tagID>@coffeCondiment.Key</label>
+                <br />
                         counter3++;
 
-                        <br />
-                    }
-                }
                 <br />
+                    }
+            }
+            <br />
 
-                <input type="button" name="prevBtn" value="Previous" class="btn btn-warning" role="button" />
-                <input type="submit" name="finishBtn" value="Finish" class="btn btn-warning" />
-            </div>
+            <input type="button" name="prevBtn" value="Previous" class="btn btn-warning" role="button" />
+            <input type="submit" name="finishBtn" value="Finish" class="btn btn-warning" />
+        </div>
 
                     }
     </div>

@@ -12,10 +12,10 @@ namespace CoffeeShop.Data
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly CoffeeShopDbContext context;
+        private readonly ApplicationDbContext context;
         private readonly DbSet<Order> dbSet;
 
-        public OrderRepository(CoffeeShopDbContext context)
+        public OrderRepository(ApplicationDbContext context)
         {
             this.context = context;
             this.dbSet = this.context.Orders;

@@ -10,10 +10,10 @@ namespace CoffeeShop.Data
 {
     public class CartRepository : ICartRepository
     {
-        private readonly CoffeeShopDbContext context;
+        private readonly ApplicationDbContext context;
         private readonly DbSet<Cart> dbSet;
 
-        public CartRepository(CoffeeShopDbContext context)
+        public CartRepository(ApplicationDbContext context)
         {
             this.context = context;
             this.dbSet = this.context.Carts;
