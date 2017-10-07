@@ -1,6 +1,5 @@
 ﻿using CoffeeShop.Data;
 using CoffeeShop.Data.Models;
-using CoffeeShop.WebUI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;

@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201710051140171_InitialCreate.Designer.cs">
       <DependentUpon>201710051140171_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710051208307_AdminRole.cs" />
+    <Compile Include="Migrations\201710051208307_AdminRole.Designer.cs">
+      <DependentUpon>201710051208307_AdminRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Order.cs" />
@@ -79,6 +83,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710051140171_InitialCreate.resx">
       <DependentUpon>201710051140171_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710051208307_AdminRole.resx">
+      <DependentUpon>201710051208307_AdminRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
