@@ -98,6 +98,7 @@
     <Compile Include="Controllers\StoreControllerTests\Index_Get_Should.cs" />
     <Compile Include="MvcMockHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Store\FinalOrderViewModel_Should.cs" />
     <Compile Include="ViewModels\Store\OrderWizardViewModel_Should.cs" />
   </ItemGroup>
   <ItemGroup>
