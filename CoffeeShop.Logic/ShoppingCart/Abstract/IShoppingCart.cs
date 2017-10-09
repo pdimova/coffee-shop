@@ -15,7 +15,6 @@ namespace CoffeeShop.Logic.ShoppingCart.Abstract
         decimal GetTotal();
         int GetCount();
         int SaveOrder(IOrder order);
-        bool ValidateOrder(int id, string name);
         void MigrateCart(string userName);
     }
 }

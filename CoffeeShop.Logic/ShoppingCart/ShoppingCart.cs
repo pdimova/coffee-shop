@@ -115,18 +115,16 @@ namespace CoffeeShop.Logic.ShoppingCart
 
         public int SaveOrder(IOrder order)
         {
+            this.cartRepository.CheckOutAll(this.shoppingCartId);
             return this.orderRepository.AddOrder(order);
-        }
-
-        public bool ValidateOrder(int id, string name)
-        {
-            //TODO
-            return true;
         }
 
         public void MigrateCart(string userName)
         {
             cartRepository.Migrate(this.shoppingCartId, userName);
+
+            //hack
+            this.shoppingCartId = userName;
         }
     }
 }

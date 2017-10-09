@@ -70,16 +70,7 @@ namespace CoffeeShop.WebUI.Controllers
             var shoppingCartId = (string)this.HttpContext.Session["CartId"];
             var cart = shoppingCart.GetShoppingCart(shoppingCartId);
 
-            bool isValid = cart.ValidateOrder(id, User.Identity.Name);
-
-            if (isValid)
-            {
-                return View(id);
-            }
-            else
-            {
-                return View("Error");
-            }
+            return View(id);
         }
     }
 }

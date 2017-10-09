@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201710051208307_AdminRole.Designer.cs">
       <DependentUpon>201710051208307_AdminRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710091036495_Cart Paroperties IsDeleted and IsCheckedOut.cs" />
+    <Compile Include="Migrations\201710091036495_Cart Paroperties IsDeleted and IsCheckedOut.Designer.cs">
+      <DependentUpon>201710091036495_Cart Paroperties IsDeleted and IsCheckedOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Order.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710051208307_AdminRole.resx">
       <DependentUpon>201710051208307_AdminRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710091036495_Cart Paroperties IsDeleted and IsCheckedOut.resx">
+      <DependentUpon>201710091036495_Cart Paroperties IsDeleted and IsCheckedOut.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

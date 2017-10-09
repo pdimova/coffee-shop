@@ -26,5 +26,10 @@ namespace CoffeeShop.WebUI
 
             return context.Session[CartSessionKey].ToString();
         }
+
+        public void SetCartSessionKey(HttpContextBase context)
+        {
+            context.Session[CartSessionKey] = context.User.Identity.Name;
+        }
     }
 }

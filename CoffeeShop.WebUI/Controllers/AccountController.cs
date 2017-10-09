@@ -197,6 +197,9 @@ namespace CoffeeShop.WebUI.Controllers
             var cart = shoppingCart.GetShoppingCart(shoppingCartId);
 
             cart.MigrateCart(userName);
+
+            //hack
+            cardIdentifier.SetCartSessionKey(this.HttpContext);
         }
 
         //
