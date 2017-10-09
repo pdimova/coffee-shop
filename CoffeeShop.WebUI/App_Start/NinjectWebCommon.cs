@@ -28,6 +28,8 @@ namespace CoffeeShop.WebUI.App_Start
     using Logic.ShoppingCart;
     using CoffeeShop.Logic.Cart.Repository;
     using CoffeeShop.Logic.Coffee.Condiments;
+    using CoffeeShop.WebUI.ViewModels.Store;
+    using System.Web.Mvc;
 
     public static class NinjectWebCommon
     {
@@ -163,6 +165,8 @@ namespace CoffeeShop.WebUI.App_Start
             kernel.Bind<IMenuProvider>().To<PlovdivMenuProvider>()
                 .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
                 .InSingletonScope();
+
+            //kernel.Bind<OrderWizardViewModel>().ToSelf().WhenInjectedExactlyInto<ViewResult>().WithConstructorArgument(kernel.Get<IMenuProvider>());
         }
     }
 }

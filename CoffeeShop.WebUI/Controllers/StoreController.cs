@@ -2,9 +2,7 @@
 using CoffeeShop.Logic.Order.Factory;
 using CoffeeShop.Logic.Stores.Abstract;
 using CoffeeShop.WebUI.ViewModels.Store;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System;
 
@@ -12,16 +10,20 @@ namespace CoffeeShop.WebUI.Controllers
 {
     public class StoreController : Controller
     {
+        private readonly string[] cityNames = new string[] { "Sofia", "Plovdiv" };
+
         private readonly IMenuProvider menuProvider;
         private readonly IProcessingOrderFactory orderFactory;
         private readonly ICoffeeStore store;
+
+
 
         public StoreController(
             ICoffeeStore store,
             IMenuProvider menuProvider,
             IProcessingOrderFactory orderFactory)
         {
-            if (store==null)
+            if (store == null)
             {
                 throw new ArgumentNullException();
             }
@@ -41,46 +43,38 @@ namespace CoffeeShop.WebUI.Controllers
 
         public ActionResult Index(string city)
         {
-            city = HttpUtility.HtmlEncode(city);
-            TempData["City"] = city;
-
-            OrderWizardViewModel orderWizardVM = new OrderWizardViewModel();
-            orderWizardVM.CoffeeTypes = this.menuProvider.GetCoffeeTypes();
-            orderWizardVM.CoffeeSizes = this.menuProvider.GetCoffeeSizes();
-            orderWizardVM.CoffeeCondiments = new Dictionary<string, bool>();
-
-            var condimentList = this.menuProvider.GetCoffeeCondiments();
-
-            foreach (var condiment in condimentList)
+            if (!this.cityNames.Contains(city))
             {
-                orderWizardVM.CoffeeCondiments.Add(condiment, false);
+                return RedirectToAction("Index", "Home");
             }
 
+            TempData["City"] = city;
             ViewBag.City = city;
+
+            OrderWizardViewModel orderWizardVM = new OrderWizardViewModel(this.menuProvider);
+
             return View(orderWizardVM);
         }
 
         [HttpPost] //AJAX
-        public ActionResult Index(OrderWizardViewModel data)
+        public ActionResult Index()
         {
-            if (ModelState.IsValid)
+            OrderWizardViewModel orderWizardVM = new OrderWizardViewModel(this.menuProvider);
+
+            if (TryUpdateModel(orderWizardVM) && ModelState.IsValid)
             {
-                var order = this.orderFactory.CreateOrder();
-                order.SelectedCoffeeType = data.SelectedCoffeeType;
-                order.SelectedCoffeeSize = data.SelectedCoffeeSize;
-                order.SelectedCoffeeCodimentsList = data.CoffeeCondiments.Where(c => c.Value == true).Select(c => c.Key).ToList();
+                var emptyOrder = this.orderFactory.CreateOrder();
+                var order = orderWizardVM.TransferDataTo(emptyOrder);
 
                 var coffee = this.store.ProcessOrder(order);
                 TempData["Order"] = coffee;
 
-                FinalOrderViewModel finalOrderViewModel = new FinalOrderViewModel();
-                finalOrderViewModel.FullDescription = coffee.FullDescription;
-                finalOrderViewModel.Price = coffee.Cost();
+                FinalOrderViewModel finalOrderViewModel = new FinalOrderViewModel(coffee);
 
                 return PartialView("Success", finalOrderViewModel);
             }
 
-            return View(data);
+            return View(orderWizardVM);
         }
     }
 }
