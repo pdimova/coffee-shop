@@ -4,7 +4,6 @@ namespace CoffeeShop.WebUI.Controllers
 {
     public class VisualizationsController : Controller
     {
-
         public ActionResult ShowCoffeeType(string coffeetype)
         {
             var cf = coffeetype.ToLower();
