@@ -5,13 +5,19 @@
     using System.Linq;
     using CoffeeShop.Logic.Menu.Abstract;
     using CoffeeShop.Logic.Order.Abstract;
+    using System;
 
     public class OrderWizardViewModel
     {
-        private IMenuProvider menuProvider;
+        private readonly IMenuProvider menuProvider;
 
         public OrderWizardViewModel(IMenuProvider menuProvider)
         {
+            if (menuProvider == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.menuProvider = menuProvider;
 
             this.CoffeeTypes = this.menuProvider.GetCoffeeTypes();
