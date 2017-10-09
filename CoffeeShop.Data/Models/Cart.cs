@@ -12,6 +12,9 @@ namespace CoffeeShop.Data.Models
         public string CoffeeDescription { get; set; }
         public decimal CoffeeCost { get; set; }
         public int Count { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsCheckedOut { get; set; }
+
 
         public DateTime DateCreated { get; set; }
     }
