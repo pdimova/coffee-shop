@@ -9,9 +9,9 @@ namespace CoffeeShop.WebUI.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCart shoppingCart;
-        private readonly CartIdentifier cardIdentifier;
+        private readonly ICartIdentifier cardIdentifier;
 
-        public ShoppingCartController(IShoppingCart shoppingCart, CartIdentifier cardIdentifier)
+        public ShoppingCartController(IShoppingCart shoppingCart, ICartIdentifier cardIdentifier)
         {
             if (shoppingCart == null)
             {
@@ -43,7 +43,7 @@ namespace CoffeeShop.WebUI.Controllers
 
         public ActionResult AddToCart()
         {
-            var oderedCoffee = TempData["Order"] as ICoffee; // so wrong
+            var oderedCoffee = TempData["Order"] as ICoffee; // meh
 
             string cartId = cardIdentifier.GetCardId(this.HttpContext);
             var cart = shoppingCart.GetShoppingCart(cartId);

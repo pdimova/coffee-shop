@@ -3,7 +3,7 @@ using System.Web;
 
 namespace CoffeeShop.WebUI
 {
-    public class CartIdentifier
+    public class CartIdentifier : ICartIdentifier
     {
         public const string CartSessionKey = "CartId";
 

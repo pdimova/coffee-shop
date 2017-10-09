@@ -19,10 +19,10 @@ namespace CoffeeShop.WebUI.Controllers
         private ApplicationUserManager _userManager;
 
         private readonly IShoppingCart shoppingCart;
-        private readonly CartIdentifier cardIdentifier;
+        private readonly ICartIdentifier cardIdentifier;
 
 
-        public AccountController(IShoppingCart shoppingCart, CartIdentifier cardIdentifier)
+        public AccountController(IShoppingCart shoppingCart, ICartIdentifier cardIdentifier)
         {
             if (shoppingCart == null)
             {

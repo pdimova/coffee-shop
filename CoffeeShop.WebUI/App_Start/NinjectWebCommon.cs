@@ -98,7 +98,7 @@ namespace CoffeeShop.WebUI.App_Start
 
             kernel.Bind<IShoppingCart>().To<ShoppingCart>().InSingletonScope();
 
-            kernel.Bind<CartIdentifier>().ToSelf();
+            kernel.Bind<ICartIdentifier>().To<CartIdentifier>();
 
             kernel.Bind<ICoffee>().To<Americano>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetAmericano(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Cappuccino>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetCappucino(default(CoffeSizeType)));
