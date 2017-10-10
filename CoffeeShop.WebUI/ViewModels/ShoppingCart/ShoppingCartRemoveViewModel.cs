@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using CoffeeShop.WebUI.ViewModels.ShoppingCart.Abstract;
 
 namespace CoffeeShop.WebUI.ViewModels.ShoppingCart
 {
-    public class ShoppingCartRemoveViewModel
+    public class ShoppingCartRemoveViewModel : IShoppingCartRemoveViewModel
     {
         public string Message { get; set; }
         public decimal CartTotal { get; set; }

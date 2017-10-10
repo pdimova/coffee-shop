@@ -30,6 +30,8 @@ namespace CoffeeShop.WebUI.App_Start
     using CoffeeShop.Logic.Coffee.Condiments;
     using CoffeeShop.WebUI.ViewModels.Store;
     using System.Web.Mvc;
+    using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
+    using CoffeeShop.WebUI.ViewModels.ShoppingCart;
 
     public static class NinjectWebCommon
     {
@@ -93,12 +95,21 @@ namespace CoffeeShop.WebUI.App_Start
             .EndingWith("Factory")
             .BindToFactory());
 
+            kernel.Bind(x => x
+            .FromThisAssembly()
+            .SelectAllClasses()
+            .BindAllInterfaces());
+
+            kernel.Bind(x => x
+             .FromThisAssembly()
+             .SelectAllInterfaces()
+             .EndingWith("Factory")
+             .BindToFactory());
+
             kernel.Bind<ICartRepository>().To<CartRepository>();
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
 
             kernel.Bind<IShoppingCart>().To<ShoppingCart>().InSingletonScope();
-
-            kernel.Bind<ICartIdentifier>().To<CartIdentifier>();
 
             kernel.Bind<ICoffee>().To<Americano>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetAmericano(default(CoffeSizeType)));
             kernel.Bind<ICoffee>().To<Cappuccino>().NamedLikeFactoryMethod((ICoffeeTypeFactory f) => f.GetCappucino(default(CoffeSizeType)));

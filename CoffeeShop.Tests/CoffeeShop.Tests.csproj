@@ -91,8 +91,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CheckoutControllerTests\Constructor_Should.cs" />
+    <Compile Include="Controllers\CheckoutControllerTests\Pay_Get_Should.cs" />
+    <Compile Include="Controllers\CheckoutControllerTests\Pay_Post_Should.cs" />
     <Compile Include="Controllers\HomeControllerTests\Constructor_Should.cs" />
     <Compile Include="Controllers\HomeControllerTests\Index_Should.cs" />
+    <Compile Include="Controllers\ShoppingCartControllerTests\AddToCart_Should.cs" />
+    <Compile Include="Controllers\ShoppingCartControllerTests\CartSummary_Should.cs" />
+    <Compile Include="Controllers\ShoppingCartControllerTests\Constructor_Should.cs" />
+    <Compile Include="Controllers\ShoppingCartControllerTests\Index_Should.cs" />
+    <Compile Include="Controllers\ShoppingCartControllerTests\RemoveFromCart_Should.cs" />
     <Compile Include="Controllers\StoreControllerTests\Constructor_Should.cs" />
     <Compile Include="Controllers\StoreControllerTests\Index_Post_Should.cs" />
     <Compile Include="Controllers\StoreControllerTests\Index_Get_Should.cs" />

@@ -1,6 +1,7 @@
 ﻿using CoffeeShop.Logic.Coffee.Abstract;
 using CoffeeShop.Logic.ShoppingCart.Abstract;
-using CoffeeShop.WebUI.ViewModels.ShoppingCart;
+using CoffeeShop.WebUI.ViewModels.ShoppingCart.Abstract;
+using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
 using System;
 using System.Web.Mvc;
 
@@ -10,8 +11,12 @@ namespace CoffeeShop.WebUI.Controllers
     {
         private readonly IShoppingCart shoppingCart;
         private readonly ICartIdentifier cardIdentifier;
+        private readonly IShoppingCartViewModelFactory shoppingCartViewModelFactory;
 
-        public ShoppingCartController(IShoppingCart shoppingCart, ICartIdentifier cardIdentifier)
+        public ShoppingCartController(
+            IShoppingCart shoppingCart,
+            ICartIdentifier cardIdentifier,
+            IShoppingCartViewModelFactory shoppingCartViewModelFactory)
         {
             if (shoppingCart == null)
             {
@@ -23,16 +28,22 @@ namespace CoffeeShop.WebUI.Controllers
                 throw new ArgumentNullException(nameof(cardIdentifier));
             }
 
+            if (shoppingCartViewModelFactory == null)
+            {
+                throw new ArgumentNullException(nameof(shoppingCartViewModelFactory));
+            }
+
             this.shoppingCart = shoppingCart;
             this.cardIdentifier = cardIdentifier;
+            this.shoppingCartViewModelFactory = shoppingCartViewModelFactory;
         }
 
         public ActionResult Index()
         {
-            var cartId = cardIdentifier.GetCardId(this.HttpContext);
-            var cart = shoppingCart.GetShoppingCart(cartId);
+            string cartId = cardIdentifier.GetCardId(this.HttpContext);
+            IShoppingCart cart = shoppingCart.GetShoppingCart(cartId);
 
-            var viewModel = new ShoppingCartViewModel();
+            IShoppingCartViewModel viewModel = this.shoppingCartViewModelFactory.CreateShoppingCartViewModel();
             viewModel.CartItems = cart.GetCartItems();
             viewModel.CartTotal = cart.GetTotal();
 
@@ -61,14 +72,12 @@ namespace CoffeeShop.WebUI.Controllers
 
             int itemCount = cart.RemoveFromCart(id);
 
-            var results = new ShoppingCartRemoveViewModel
-            {
-                Message = "Order has been removed from your shopping cart.",
-                CartTotal = cart.GetTotal(),
-                CartCount = cart.GetCount(),
-                ItemCount = itemCount,
-                DeleteId = id
-            };
+            IShoppingCartRemoveViewModel results = this.shoppingCartViewModelFactory.CreateShoppingCartRemoveViewModel();
+            results.Message = "Order has been removed from your shopping cart.";
+            results.CartTotal = cart.GetTotal();
+            results.CartCount = cart.GetCount();
+            results.ItemCount = itemCount;
+            results.DeleteId = id;
 
             return Json(results);
         }
