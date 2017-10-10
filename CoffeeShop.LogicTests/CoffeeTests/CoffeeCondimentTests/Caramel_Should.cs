@@ -91,5 +91,20 @@
             // Assert
             Assert.That(obj.Cost(), Is.EqualTo(expectedCost));
         }
+
+        [Test]
+        public void CaramelClass_IdProperty_ShouldReturnCorrectId()
+        {
+            // Arrange
+            var coffeeMock = new Mock<ICoffee>();
+            coffeeMock.Setup(p => p.Id).Returns("Test");
+            var expectedId = "CA1";
+
+            // Act
+            var obj = new Caramel(coffeeMock.Object);
+
+            // Assert
+            Assert.That(obj, Has.Property("Id").Contains(expectedId));
+        }
     }
 }

@@ -91,5 +91,20 @@
             // Assert
             Assert.That(obj.Cost(), Is.EqualTo(expectedCost));
         }
+
+        [Test]
+        public void MilkClass_IdProperty_ShouldReturnCorrectId()
+        {
+            // Arrange
+            var coffeeMock = new Mock<ICoffee>();
+            coffeeMock.Setup(p => p.Id).Returns("Test");
+            var expectedId = "MI4";
+
+            // Act
+            var obj = new Milk(coffeeMock.Object);
+
+            // Assert
+            Assert.That(obj, Has.Property("Id").Contains(expectedId));
+        }
     }
 }
