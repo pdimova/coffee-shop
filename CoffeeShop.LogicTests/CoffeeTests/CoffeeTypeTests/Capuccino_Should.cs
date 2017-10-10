@@ -3,19 +3,13 @@
     using Logic.Coffee;
     using Logic.Coffee.Abstract;
     using Logic.Coffee.CoffeeTypes;
-    using Moq;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
-    public class Capuccino_Should
+    public class Cappuccino_Should
     {
         [Test]
-        public void CapuccinoClass_ShouldImplementICoffeeInterface()
+        public void CappuccinoClass_ShouldImplementICoffeeInterface()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
@@ -28,7 +22,7 @@
         }
 
         [Test]
-        public void CapuccinoClass_ShouldInheritCoffeeAbstractClass()
+        public void CappuccinoClass_ShouldInheritCoffeeAbstractClass()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
@@ -41,7 +35,7 @@
         }
 
         [Test]
-        public void CapuccinoClass_Countructor_ShouldInitializeObjectCorrectly()
+        public void CappuccinoClass_Countructor_ShouldInitializeObjectCorrectly()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
@@ -54,11 +48,11 @@
         }
 
         [Test]
-        public void CapuccinoClass_Countructor_ShouldSetDescriptionCorrectly()
+        public void CappuccinoClass_Countructor_ShouldSetDescriptionCorrectly()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
-            var expectedDescription = "Capuccino";
+            var expectedDescription = "Cappuccino";
 
             // Act
             var obj = new Cappuccino(coffeeSize);
@@ -68,7 +62,7 @@
         }
 
         [Test]
-        public void CapuccinoClass_Countructor_ShouldSetSizeCorrectly()
+        public void CappuccinoClass_Countructor_ShouldSetSizeCorrectly()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
@@ -82,7 +76,7 @@
         }
 
         [Test]
-        public void CapuccinoClass_FullDescriptionProperty_ShouldExists()
+        public void CappuccinoClass_FullDescriptionProperty_ShouldExists()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
@@ -95,11 +89,11 @@
         }
 
         [Test]
-        public void CapuccinoClass_FullDescriptionProperty_ShouldReturnCorrectFullDescription()
+        public void CappuccinoClass_FullDescriptionProperty_ShouldReturnCorrectFullDescription()
         {
             // Arrange
             var coffeeSize = CoffeSizeType.Medium;
-            var expectedDescription = "Capuccino";
+            var expectedDescription = "Cappuccino";
             var expectedSize = coffeeSize.ToString();
             var expectedFullDescription = expectedSize + " " + expectedDescription;
 
@@ -113,7 +107,7 @@
         [TestCase(CoffeSizeType.Small)]
         [TestCase(CoffeSizeType.Medium)]
         [TestCase(CoffeSizeType.Grande)]
-        public void CapuccinoClass_CostMethod_ShouldReturnCorrectPriceBasedOnCoffeSize(CoffeSizeType coffeeSize)
+        public void CappuccinoClass_CostMethod_ShouldReturnCorrectPriceBasedOnCoffeSize(CoffeSizeType coffeeSize)
         {
             // Arrange
             var basePrice = 3.50m;
@@ -124,6 +118,20 @@
 
             // Assert
             Assert.That(obj.Cost(), Is.EqualTo(expectedCost));
+        }
+
+        [Test]
+        public void CappuccinoClass_IdProperty_ShouldReturnCorrectId()
+        {
+            // Arrange
+            var coffeeSize = CoffeSizeType.Medium;
+            var expectedId = "CAP";
+
+            // Act
+            var obj = new Cappuccino(coffeeSize);
+
+            // Assert
+            Assert.That(obj, Has.Property("Id").EqualTo(expectedId));
         }
     }
 }

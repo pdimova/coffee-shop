@@ -3,13 +3,7 @@
     using Logic.Coffee;
     using Logic.Coffee.Abstract;
     using Logic.Coffee.CoffeeTypes;
-    using Moq;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class Latte_Should
@@ -124,6 +118,20 @@
 
             // Assert
             Assert.That(obj.Cost(), Is.EqualTo(expectedCost));
+        }
+
+        [Test]
+        public void LatteClass_IdProperty_ShouldReturnCorrectId()
+        {
+            // Arrange
+            var coffeeSize = CoffeSizeType.Medium;
+            var expectedId = "LAT";
+
+            // Act
+            var obj = new Latte(coffeeSize);
+
+            // Assert
+            Assert.That(obj, Has.Property("Id").EqualTo(expectedId));
         }
     }
 }

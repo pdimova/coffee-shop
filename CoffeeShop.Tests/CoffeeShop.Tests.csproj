@@ -91,6 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CheckoutControllerTests\Complete_Should.cs" />
     <Compile Include="Controllers\CheckoutControllerTests\Constructor_Should.cs" />
     <Compile Include="Controllers\CheckoutControllerTests\Pay_Get_Should.cs" />
     <Compile Include="Controllers\CheckoutControllerTests\Pay_Post_Should.cs" />

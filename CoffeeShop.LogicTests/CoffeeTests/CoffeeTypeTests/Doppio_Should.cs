@@ -2,15 +2,8 @@
 {
     using Logic.Coffee;
     using Logic.Coffee.Abstract;
-    using Logic.Coffee.CoffeeTypes;
     using Logic.Coffee.CoffeeTypes.SofiaStoreSpecialTypes;
-    using Moq;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class Doppio_Should
@@ -125,6 +118,20 @@
 
             // Assert
             Assert.That(obj.Cost(), Is.EqualTo(expectedCost));
+        }
+
+        [Test]
+        public void DoppioClass_IdProperty_ShouldReturnCorrectId()
+        {
+            // Arrange
+            var coffeeSize = CoffeSizeType.Medium;
+            var expectedId = "DOP";
+
+            // Act
+            var obj = new Doppio(coffeeSize);
+
+            // Assert
+            Assert.That(obj, Has.Property("Id").EqualTo(expectedId));
         }
     }
 }
