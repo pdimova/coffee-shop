@@ -64,8 +64,12 @@
     <Compile Include="CoffeeTests\CoffeeTypeTests\Doppio_Should.cs" />
     <Compile Include="CoffeeTests\CoffeeTypeTests\Latte_Should.cs" />
     <Compile Include="OrderTests\Order_Should.cs" />
-    <Compile Include="OrderTests\ProcessedOrder_Should.cs" />
+    <Compile Include="OrderTests\ProcessingOrder_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoresTests\Fakes\PlovdivCoffeeStoreFake.cs" />
+    <Compile Include="StoresTests\Fakes\SofiaCoffeeStoreFake.cs" />
+    <Compile Include="StoresTests\PlovdivCoffeeStore_Should.cs" />
+    <Compile Include="StoresTests\SofiaCoffeeStore_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,9 +83,7 @@
       <Name>CoffeeShop.Logic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StoresTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

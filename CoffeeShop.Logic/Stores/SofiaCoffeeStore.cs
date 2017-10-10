@@ -5,34 +5,32 @@
     using Abstract;
     using Coffee;
     using Coffee.Abstract;
-    using Order.Factory;
 
     public class SofiaCoffeeStore : CoffeeStore
     {
-        private readonly IDictionary<string, Func<CoffeSizeType, ICoffee>> strategies;
+        private readonly IDictionary<string, Func<CoffeSizeType, ICoffee>> coffeetypeStrategies;
 
         public SofiaCoffeeStore(
-            IOrderFactory processedOrderFactory,
             IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies,
-            IDictionary<string, Func<CoffeSizeType, ICoffee>> strategies)
-            : base(processedOrderFactory, condimentsStrategies)
+            IDictionary<string, Func<CoffeSizeType, ICoffee>> coffeetypeStrategies)
+            : base(condimentsStrategies)
         {
-            if (strategies == null)
+            if (coffeetypeStrategies == null)
             {
-                throw new ArgumentNullException(nameof(strategies));
+                throw new ArgumentNullException(nameof(coffeetypeStrategies));
             }
 
-            this.strategies = strategies;
+            this.coffeetypeStrategies = coffeetypeStrategies;
         }
 
         protected override ICoffee CreateCoffee(string coffeeType, CoffeSizeType size)
         {
-            if (!this.strategies.ContainsKey(coffeeType))
+            if (!this.coffeetypeStrategies.ContainsKey(coffeeType))
             {
                 throw new ArgumentNullException();
             }
 
-            return this.strategies[coffeeType](size);
+            return this.coffeetypeStrategies[coffeeType](size);
         }
     }
 }

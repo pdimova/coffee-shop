@@ -4,41 +4,39 @@
     using Coffee;
     using Coffee.Abstract;
     using Order.Abstract;
-    using Order.Factory;
     using System.Collections.Generic;
 
     public abstract class CoffeeStore : ICoffeeStore
     {
-        private readonly IOrderFactory processedOrderFactory;
         private readonly IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies;
 
-        public CoffeeStore(
-            IOrderFactory processedOrderFactory,
-            IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies)
+        public CoffeeStore(IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies)
         {
             if (condimentsStrategies == null)
             {
                 throw new ArgumentNullException(nameof(condimentsStrategies));
             }
 
-            if (processedOrderFactory == null)
-            {
-                throw new ArgumentNullException(nameof(processedOrderFactory));
-            }
-
-            this.processedOrderFactory = processedOrderFactory;
             this.condimentsStrategies = condimentsStrategies;
         }
 
         public ICoffee ProcessOrder(IProcessingOrder order)
-
         {
+            if (order == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             ICoffee coffee;
 
             var coffeeType = order.SelectedCoffeeType;
 
             CoffeSizeType coffeeSize;
-            Enum.TryParse(order.SelectedCoffeeSize, out coffeeSize);
+
+            if (!Enum.TryParse(order.SelectedCoffeeSize, out coffeeSize))
+            {
+                throw new ArgumentException();
+            }
 
             coffee = this.CreateCoffee(coffeeType, coffeeSize);
 
@@ -51,10 +49,6 @@
 
                 coffee = this.condimentsStrategies[condimentAsString](coffee);
             }
-
-            // Might not be so good idea to return IProcessedOrder insted of ICoffee
-            //var processedOrder = this.processedOrderFactory.CreateOrder(coffee);
-            //return processedOrder;
 
             return coffee;
         }

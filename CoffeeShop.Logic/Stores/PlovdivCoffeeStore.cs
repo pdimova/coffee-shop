@@ -5,18 +5,15 @@
     using Abstract;
     using Coffee;
     using Coffee.Abstract;
-    using Coffee.CondimetsDecorators.Factory;
-    using Order.Factory;
 
     public class PlovdivCoffeeStore : CoffeeStore
     {
         private readonly IDictionary<string, Func<CoffeSizeType, ICoffee>> strategies;
 
         public PlovdivCoffeeStore(
-            IOrderFactory processedOrderFactory,
             IDictionary<string, Func<ICoffee, ICoffee>> condimentsStrategies,
             IDictionary<string, Func<CoffeSizeType, ICoffee>> strategies)
-            : base(processedOrderFactory, condimentsStrategies)
+            : base(condimentsStrategies)
         {
             if (strategies == null)
             {
