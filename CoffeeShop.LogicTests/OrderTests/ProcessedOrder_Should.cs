@@ -1,113 +1,85 @@
 ﻿namespace CoffeeShop.LogicTests.OrderTests
 {
-    using Logic.Coffee.Abstract;
     using Logic.Order;
     using Logic.Order.Abstract;
-    using Moq;
     using NUnit.Framework;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
-    //[TestFixture]
-    //public class ProcessedOrder_Should
-    //{
-    //    [Test]
-    //    public void ProcessedOrderClass_ShouldImplementIOrderInterface()
-    //    {
-    //        // Arrange 
-    //        var coffeeMock = new Mock<ICoffee>();
+    [TestFixture]
+    public class ProcessingOrder_Should
+    {
+        [Test]
+        public void ProcessingOrderClass_ShouldImplementIProcessingOrderInterface()
+        {
+            // Arrange & Act
+            var processingOrder = new ProcessingOrder();
 
-    //        // Act
-    //        var order = new Order(coffeeMock.Object);
+            // Assert
+            Assert.That(processingOrder, Is.InstanceOf<IProcessingOrder>());
+        }
 
-    //        // Assert
-    //        Assert.That(order, Is.InstanceOf<IOrder>());
-    //    }
+        [Test]
+        public void ProcessingOrderClass_DefaultCountructor_ShouldInitializeObjectCorrectly()
+        {
+            // Arrange & Act
+            var processingOrder = new ProcessingOrder();
 
-    //    [Test]
-    //    public void ProcessedOrderClass_Countructor_ShouldInitializeObjectCorrectly()
-    //    {
-    //        // Arrange 
-    //        var coffeeMock = new Mock<ICoffee>();
+            // Assert
+            Assert.That(processingOrder, Is.Not.Null);
+        }
 
-    //        // Act
-    //        var order = new Order(coffeeMock.Object);
+        [Test]
+        public void ProcessingOrderClass_AllProperties_ShouldExists()
+        {
+            // Arrange & Act
+            var processingOrder = new ProcessingOrder();
 
-    //        // Assert
-    //        Assert.That(order, Is.InstanceOf<Order>());
-    //    }
+            // Assert
+            Assert.That(processingOrder, Has.Property("SelectedCoffeeType"));
+            Assert.That(processingOrder, Has.Property("SelectedCoffeeSize"));
+            Assert.That(processingOrder, Has.Property("SelectedCoffeeCodimentsList"));
+        }
 
-    //    [Test]
-    //    public void ProcessedOrderClass_Countructor_ShouldThrowArgumentNullExceptionWhenInvalidParameterProvided()
-    //    {
-    //        // Arrange 
-    //        ICoffee coffee = null;
+        [Test]
+        public void ProcessingOrderClass_SelectedCoffeeTypeProperty_ShouldReturnCorrectValue()
+        {
+            // Arrange
+            var coffeeType = "Espresso";
+            var processingOrder = new ProcessingOrder();
 
-    //        // Act && Assert
-    //        Assert.That(() => new Order(coffee), Throws.ArgumentNullException.With.Message.Contains("coffee"));
-    //    }
+            // Act
+            processingOrder.SelectedCoffeeType = coffeeType;
 
-    //    [Test]
-    //    public void ProcessedOrderClass_Countructor_ShouldSetFullDescriptionProperty()
-    //    {
-    //        // Arrange 
-    //        var description = "Coffee Description";
-    //        var coffeeMock = new Mock<ICoffee>();
-    //        coffeeMock.Setup(x => x.FullDescription).Returns(description).Verifiable();
+            // Assert
+            Assert.That(processingOrder.SelectedCoffeeType, Is.SameAs(coffeeType));
+        }
 
-    //        // Act
-    //        var order = new Order(coffeeMock.Object);
+        [Test]
+        public void ProcessingOrderClass_SelectedCoffeeSizeProperty_ShouldReturnCorrectValue()
+        {
+            // Arrange
+            var coffeeSize = "Grande";
+            var processingOrder = new ProcessingOrder();
 
-    //        // Assert
-    //        coffeeMock.Verify(x => x.FullDescription, Times.Once);
-    //    }
+            // Act
+            processingOrder.SelectedCoffeeSize = coffeeSize;
 
-    //    [Test]
-    //    public void ProcessedOrderClass_Countructor_ShouldSetCostProperty()
-    //    {
-    //        // Arrange 
-    //        var cost = 4.09m;
-    //        var coffeeMock = new Mock<ICoffee>();
-    //        coffeeMock.Setup(x => x.Cost()).Returns(cost).Verifiable();
+            // Assert
+            Assert.That(processingOrder.SelectedCoffeeSize, Is.SameAs(coffeeSize));
+        }
 
-    //        // Act
-    //        var order = new Order(coffeeMock.Object);
+        [Test]
+        public void ProcessingOrderClass_SelectedCoffeeCodimentsListProperty_ShouldReturnCorrectValue()
+        {
+            // Arrange & Act
+            var condimentsList = new List<string> { "Milk", "Honey" };
+            var processingOrder = new ProcessingOrder();
 
-    //        // Assert
-    //        coffeeMock.Verify(x => x.Cost(), Times.Once);
-    //    }
+            // Act
+            processingOrder.SelectedCoffeeCodimentsList = condimentsList;
 
-    //    [Test]
-    //    public void ProcessedOrderClass_FullDescriptionProperty_ShouldReturnCorrectValue()
-    //    {
-    //        // Arrange 
-    //        var description = "Coffee Description";
-    //        var coffeeMock = new Mock<ICoffee>();
-    //        coffeeMock.Setup(x => x.FullDescription).Returns(description);
-
-    //        // Act
-    //        var order = new Order(coffeeMock.Object);
-
-    //        // Assert
-    //        Assert.That(order.FullDescription, Is.EqualTo(description));
-    //    }
-
-    //    [Test]
-    //    public void ProcessedOrderClass_CostProperty_ShouldReturnCorrectValue()
-    //    {
-    //        // Arrange 
-    //        var cost = 4.09m;
-    //        var coffeeMock = new Mock<ICoffee>();
-    //        coffeeMock.Setup(x => x.Cost()).Returns(cost);
-
-    //        // Act
-    //        var order = new Order(coffeeMock.Object);
-
-    //        // Assert
-    //        Assert.That(order.Cost, Is.EqualTo(cost));
-    //    }
-    //}
+            // Assert
+            Assert.That(processingOrder.SelectedCoffeeCodimentsList, Is.SameAs(condimentsList));
+        }
+    }
 }
