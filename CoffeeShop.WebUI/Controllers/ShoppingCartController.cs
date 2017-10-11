@@ -1,7 +1,6 @@
 ﻿using CoffeeShop.Logic.Coffee.Abstract;
 using CoffeeShop.Logic.ShoppingCart.Abstract;
-using CoffeeShop.WebUI.ViewModels.ShoppingCart.Abstract;
-using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
+using CoffeeShop.WebUI.ViewModels.ShoppingCart;
 using System;
 using System.Web.Mvc;
 
@@ -11,12 +10,10 @@ namespace CoffeeShop.WebUI.Controllers
     {
         private readonly IShoppingCart shoppingCart;
         private readonly ICartIdentifier cardIdentifier;
-        private readonly IShoppingCartViewModelFactory shoppingCartViewModelFactory;
 
         public ShoppingCartController(
             IShoppingCart shoppingCart,
-            ICartIdentifier cardIdentifier,
-            IShoppingCartViewModelFactory shoppingCartViewModelFactory)
+            ICartIdentifier cardIdentifier)
         {
             if (shoppingCart == null)
             {
@@ -28,14 +25,8 @@ namespace CoffeeShop.WebUI.Controllers
                 throw new ArgumentNullException(nameof(cardIdentifier));
             }
 
-            if (shoppingCartViewModelFactory == null)
-            {
-                throw new ArgumentNullException(nameof(shoppingCartViewModelFactory));
-            }
-
             this.shoppingCart = shoppingCart;
             this.cardIdentifier = cardIdentifier;
-            this.shoppingCartViewModelFactory = shoppingCartViewModelFactory;
         }
 
         public ActionResult Index()
@@ -43,7 +34,7 @@ namespace CoffeeShop.WebUI.Controllers
             string cartId = cardIdentifier.GetCardId(this.HttpContext);
             IShoppingCart cart = shoppingCart.GetShoppingCart(cartId);
 
-            IShoppingCartViewModel viewModel = this.shoppingCartViewModelFactory.CreateShoppingCartViewModel();
+            ShoppingCartViewModel viewModel = new ShoppingCartViewModel();
             viewModel.CartItems = cart.GetCartItems();
             viewModel.CartTotal = cart.GetTotal();
 
@@ -72,7 +63,7 @@ namespace CoffeeShop.WebUI.Controllers
 
             int itemCount = cart.RemoveFromCart(id);
 
-            IShoppingCartRemoveViewModel results = this.shoppingCartViewModelFactory.CreateShoppingCartRemoveViewModel();
+            ShoppingCartRemoveViewModel results = new ShoppingCartRemoveViewModel();
             results.Message = "Order has been removed from your shopping cart.";
             results.CartTotal = cart.GetTotal();
             results.CartCount = cart.GetCount();

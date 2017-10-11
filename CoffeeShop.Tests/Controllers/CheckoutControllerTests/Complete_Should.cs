@@ -2,7 +2,6 @@
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using CoffeeShop.WebUI;
 using CoffeeShop.WebUI.Controllers;
-using CoffeeShop.WebUI.ViewModels.Checkout.Factory;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -21,7 +20,6 @@ namespace CoffeeShop.Tests.Controllers.CheckoutControllerTests
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<IOrderFactory> orderFactoryMock = new Mock<IOrderFactory>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IPaymentAddressViewModelFactory> paymentAddressViewModelFactoryMock = new Mock<IPaymentAddressViewModelFactory>();
 
             var orderOd = 1;
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -30,7 +28,7 @@ namespace CoffeeShop.Tests.Controllers.CheckoutControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            CheckoutController checkoutController = new CheckoutController(shoppingCartMock.Object, orderFactoryMock.Object, cartIdentifierMock.Object, paymentAddressViewModelFactoryMock.Object);
+            CheckoutController checkoutController = new CheckoutController(shoppingCartMock.Object, orderFactoryMock.Object, cartIdentifierMock.Object);
 
             //Act
             checkoutController.Complete(orderOd);
@@ -46,7 +44,6 @@ namespace CoffeeShop.Tests.Controllers.CheckoutControllerTests
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<IOrderFactory> orderFactoryMock = new Mock<IOrderFactory>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IPaymentAddressViewModelFactory> paymentAddressViewModelFactoryMock = new Mock<IPaymentAddressViewModelFactory>();
 
             var orderOd = 1;
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -55,7 +52,7 @@ namespace CoffeeShop.Tests.Controllers.CheckoutControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            CheckoutController checkoutController = new CheckoutController(shoppingCartMock.Object, orderFactoryMock.Object, cartIdentifierMock.Object, paymentAddressViewModelFactoryMock.Object);
+            CheckoutController checkoutController = new CheckoutController(shoppingCartMock.Object, orderFactoryMock.Object, cartIdentifierMock.Object);
 
             //Act
             checkoutController.Complete(orderOd);
@@ -71,7 +68,6 @@ namespace CoffeeShop.Tests.Controllers.CheckoutControllerTests
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<IOrderFactory> orderFactoryMock = new Mock<IOrderFactory>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IPaymentAddressViewModelFactory> paymentAddressViewModelFactoryMock = new Mock<IPaymentAddressViewModelFactory>();
 
             var orderOd = 1;
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -80,7 +76,7 @@ namespace CoffeeShop.Tests.Controllers.CheckoutControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            CheckoutController checkoutController = new CheckoutController(shoppingCartMock.Object, orderFactoryMock.Object, cartIdentifierMock.Object, paymentAddressViewModelFactoryMock.Object);
+            CheckoutController checkoutController = new CheckoutController(shoppingCartMock.Object, orderFactoryMock.Object, cartIdentifierMock.Object);
 
             //Act
             var result = checkoutController.Complete(orderOd);

@@ -1,13 +1,11 @@
-﻿using CoffeeShop.WebUI.ViewModels.ShoppingCart.Abstract;
-
-namespace CoffeeShop.WebUI.ViewModels.ShoppingCart
+﻿namespace CoffeeShop.WebUI.ViewModels.ShoppingCart
 {
-    public class ShoppingCartRemoveViewModel : IShoppingCartRemoveViewModel
+    public class ShoppingCartRemoveViewModel
     {
-        public string Message { get; set; }
-        public decimal CartTotal { get; set; }
-        public int CartCount { get; set; }
-        public int ItemCount { get; set; }
-        public string DeleteId { get; set; }
+        public virtual string Message { get; set; }
+        public virtual decimal CartTotal { get; set; }
+        public virtual int CartCount { get; set; }
+        public virtual int ItemCount { get; set; }
+        public virtual string DeleteId { get; set; }
     }
 }

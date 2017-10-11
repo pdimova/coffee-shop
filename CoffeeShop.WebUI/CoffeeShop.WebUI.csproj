@@ -246,8 +246,6 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
-    <Compile Include="ViewModels\Checkout\Factory\IPaymentAddressViewModelFactory.cs" />
-    <Compile Include="ViewModels\Checkout\Abstract\IPaymentAddressViewModel.cs" />
     <Compile Include="ViewModels\Checkout\PaymentAddressViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
@@ -257,9 +255,6 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\ShoppingCart\Factory\IShoppingCartViewModelFactory.cs" />
-    <Compile Include="ViewModels\ShoppingCart\Abstract\IShoppingCartViewModel.cs" />
-    <Compile Include="ViewModels\ShoppingCart\Abstract\IShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCart\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCart\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModels\Store\FinalOrderViewModel.cs" />

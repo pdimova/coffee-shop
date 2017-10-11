@@ -3,8 +3,7 @@ using CoffeeShop.Logic.Cart.Abstract;
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using CoffeeShop.WebUI;
 using CoffeeShop.WebUI.Controllers;
-using CoffeeShop.WebUI.ViewModels.ShoppingCart.Abstract;
-using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
+using CoffeeShop.WebUI.ViewModels.ShoppingCart;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -24,10 +23,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
-            Mock<IShoppingCartViewModel> shoppingCartViewModel = new Mock<IShoppingCartViewModel>();
+            Mock<ShoppingCartViewModel> shoppingCartViewModel = new Mock<ShoppingCartViewModel>();
 
             var id = Guid.NewGuid().ToString();
             var cartItemsList = new List<ICart>()
@@ -46,9 +44,8 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
             shoppingCartMock.Setup(m => m.GetCartItems()).Returns(cartItemsList);
             shoppingCartMock.Setup(m => m.GetTotal()).Returns(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum());
-            shoppingCartViewModelFactory.Setup(m => m.CreateShoppingCartViewModel()).Returns(shoppingCartViewModel.Object);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
 
             //Act
             shoppingCartController.Index();
@@ -63,10 +60,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
-            Mock<IShoppingCartViewModel> shoppingCartViewModel = new Mock<IShoppingCartViewModel>();
+            Mock<ShoppingCartViewModel> shoppingCartViewModel = new Mock<ShoppingCartViewModel>();
 
             var id = Guid.NewGuid().ToString();
             var cartItemsList = new List<ICart>()
@@ -85,9 +81,8 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
             shoppingCartMock.Setup(m => m.GetCartItems()).Returns(cartItemsList);
             shoppingCartMock.Setup(m => m.GetTotal()).Returns(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum());
-            shoppingCartViewModelFactory.Setup(m => m.CreateShoppingCartViewModel()).Returns(shoppingCartViewModel.Object);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
 
             //Act
             shoppingCartController.Index();
@@ -102,10 +97,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
-            Mock<IShoppingCartViewModel> shoppingCartViewModel = new Mock<IShoppingCartViewModel>();
+            Mock<ShoppingCartViewModel> shoppingCartViewModel = new Mock<ShoppingCartViewModel>();
 
             var id = Guid.NewGuid().ToString();
             var cartItemsList = new List<ICart>()
@@ -124,17 +118,15 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
             shoppingCartMock.Setup(m => m.GetCartItems()).Returns(cartItemsList);
             shoppingCartMock.Setup(m => m.GetTotal()).Returns(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum());
-            shoppingCartViewModelFactory.Setup(m => m.CreateShoppingCartViewModel()).Returns(shoppingCartViewModel.Object);
             shoppingCartViewModel.SetupProperty(p => p.CartItems);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
 
             //Act
             shoppingCartController.Index();
 
             // Assert
             shoppingCartMock.Verify(m => m.GetCartItems(), Times.Once());
-            Assert.That(shoppingCartViewModel.Object.CartItems, Is.EquivalentTo(cartItemsList));
         }
 
         [Test]
@@ -143,10 +135,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
-            Mock<IShoppingCartViewModel> shoppingCartViewModel = new Mock<IShoppingCartViewModel>();
+            Mock<ShoppingCartViewModel> shoppingCartViewModel = new Mock<ShoppingCartViewModel>();
 
             var id = Guid.NewGuid().ToString();
             var cartItemsList = new List<ICart>()
@@ -165,17 +156,15 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
             shoppingCartMock.Setup(m => m.GetCartItems()).Returns(cartItemsList);
             shoppingCartMock.Setup(m => m.GetTotal()).Returns(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum());
-            shoppingCartViewModelFactory.Setup(m => m.CreateShoppingCartViewModel()).Returns(shoppingCartViewModel.Object);
             shoppingCartViewModel.SetupProperty(p => p.CartTotal);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
 
             //Act
             shoppingCartController.Index();
 
             // Assert
             shoppingCartMock.Verify(m => m.GetTotal(), Times.Once());
-            Assert.That(shoppingCartViewModel.Object.CartTotal, Is.EqualTo(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum()));
         }
 
         [Test]
@@ -184,10 +173,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
-            Mock<IShoppingCartViewModel> shoppingCartViewModel = new Mock<IShoppingCartViewModel>();
+            Mock<ShoppingCartViewModel> shoppingCartViewModel = new Mock<ShoppingCartViewModel>();
 
             var id = Guid.NewGuid().ToString();
             var cartItemsList = new List<ICart>()
@@ -206,10 +194,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
             shoppingCartMock.Setup(m => m.GetCartItems()).Returns(cartItemsList);
             shoppingCartMock.Setup(m => m.GetTotal()).Returns(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum());
-            shoppingCartViewModelFactory.Setup(m => m.CreateShoppingCartViewModel()).Returns(shoppingCartViewModel.Object);
             shoppingCartViewModel.SetupProperty(p => p.CartTotal);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
             shoppingCartController.TempData["City"] = "Sofia";
             //Act
             shoppingCartController.Index();
@@ -224,10 +211,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
-            Mock<IShoppingCartViewModel> shoppingCartViewModel = new Mock<IShoppingCartViewModel>();
+            Mock<ShoppingCartViewModel> shoppingCartViewModel = new Mock<ShoppingCartViewModel>();
 
             var id = Guid.NewGuid().ToString();
             var cartItemsList = new List<ICart>()
@@ -246,10 +232,9 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
             shoppingCartMock.Setup(m => m.GetCartItems()).Returns(cartItemsList);
             shoppingCartMock.Setup(m => m.GetTotal()).Returns(cartItemsList.Select(c => c.Count * c.CoffeeCost).Sum());
-            shoppingCartViewModelFactory.Setup(m => m.CreateShoppingCartViewModel()).Returns(shoppingCartViewModel.Object);
             shoppingCartViewModel.SetupProperty(p => p.CartTotal);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
 
             //Act
             var result = shoppingCartController.Index();

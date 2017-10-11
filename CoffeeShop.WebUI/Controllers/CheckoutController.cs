@@ -1,8 +1,6 @@
 ﻿using CoffeeShop.Logic.Order.Factory;
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using CoffeeShop.WebUI.ViewModels.Checkout;
-using CoffeeShop.WebUI.ViewModels.Checkout.Abstract;
-using CoffeeShop.WebUI.ViewModels.Checkout.Factory;
 using System;
 using System.Web.Mvc;
 
@@ -14,13 +12,11 @@ namespace CoffeeShop.WebUI.Controllers
         private readonly IShoppingCart shoppingCart;
         private readonly IOrderFactory orderFactory;
         private readonly ICartIdentifier cardIdentifier;
-        private readonly IPaymentAddressViewModelFactory paymentAddressViewModelFactory;
 
         public CheckoutController(
             IShoppingCart shoppingCart,
             IOrderFactory orderFactory,
-            ICartIdentifier cardIdentifier,
-            IPaymentAddressViewModelFactory paymentAddressViewModelFactory)
+            ICartIdentifier cardIdentifier)
         {
             if (shoppingCart == null)
             {
@@ -37,27 +33,21 @@ namespace CoffeeShop.WebUI.Controllers
                 throw new ArgumentNullException(nameof(cardIdentifier));
             }
 
-            if (paymentAddressViewModelFactory == null)
-            {
-                throw new ArgumentNullException(nameof(paymentAddressViewModelFactory));
-            }
-
             this.shoppingCart = shoppingCart;
             this.orderFactory = orderFactory;
             this.cardIdentifier = cardIdentifier;
-            this.paymentAddressViewModelFactory = paymentAddressViewModelFactory;
         }
 
         public ActionResult Pay()
         {
-            IPaymentAddressViewModel paymentAddressVM = paymentAddressViewModelFactory.CreatePaymentAddressViewModel();
+            PaymentAddressViewModel paymentAddressVM = new PaymentAddressViewModel();
             paymentAddressVM.City = new SelectList(new string[] { "Sofia", "Plovdiv" });
 
             return View(paymentAddressVM);
         }
 
         [HttpPost]
-        public ActionResult Pay(IPaymentAddressViewModel pymentAddressVM)
+        public ActionResult Pay(PaymentAddressViewModel pymentAddressVM)
         {
             if (ModelState.IsValid)
             {

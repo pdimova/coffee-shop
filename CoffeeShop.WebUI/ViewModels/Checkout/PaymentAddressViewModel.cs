@@ -1,32 +1,31 @@
-﻿using CoffeeShop.WebUI.ViewModels.Checkout.Abstract;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace CoffeeShop.WebUI.ViewModels.Checkout
 {
-    public class PaymentAddressViewModel : IPaymentAddressViewModel
+    public class PaymentAddressViewModel
     {
         [Required]
-        public string FirstName { get; set; }
+        public virtual string FirstName { get; set; }
 
         [Required]
-        public string LastName { get; set; }
+        public virtual string LastName { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        public virtual string Address { get; set; }
 
         public SelectList City { get; set; }
 
         [Required]
-        public string PostalCode { get; set; }
+        public virtual string PostalCode { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        public virtual string Phone { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         [Required]
-        public string Details { get; set; }
+        public virtual string Details { get; set; }
     }
 }

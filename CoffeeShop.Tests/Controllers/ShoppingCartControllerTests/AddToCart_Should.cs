@@ -2,7 +2,6 @@
 using CoffeeShop.Logic.ShoppingCart.Abstract;
 using CoffeeShop.WebUI;
 using CoffeeShop.WebUI.Controllers;
-using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -20,7 +19,6 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<ICoffee> coffeeMock = new Mock<ICoffee>();
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -29,7 +27,7 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
             shoppingCartController.TempData["Order"] = coffeeMock.Object;
 
             //Act
@@ -45,7 +43,6 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<ICoffee> coffeeMock = new Mock<ICoffee>();
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -54,7 +51,7 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
             shoppingCartController.TempData["Order"] = coffeeMock.Object;
 
             //Act
@@ -70,7 +67,6 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<ICoffee> coffeeMock = new Mock<ICoffee>();
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -79,7 +75,7 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
             shoppingCartController.TempData["Order"] = coffeeMock.Object;
 
             //Act
@@ -95,7 +91,6 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             // Arrange
             Mock<IShoppingCart> shoppingCartMock = new Mock<IShoppingCart>();
             Mock<ICartIdentifier> cartIdentifierMock = new Mock<ICartIdentifier>();
-            Mock<IShoppingCartViewModelFactory> shoppingCartViewModelFactory = new Mock<IShoppingCartViewModelFactory>();
 
             Mock<ICoffee> coffeeMock = new Mock<ICoffee>();
             Mock<HttpContextBase> httpContextBaseMock = new Mock<HttpContextBase>();
@@ -104,7 +99,7 @@ namespace CoffeeShop.Tests.Controllers.ShoppingCartControllerTests
             cartIdentifierMock.Setup(m => m.GetCardId(It.IsAny<HttpContextBase>())).Returns(id);
             shoppingCartMock.Setup(m => m.GetShoppingCart(It.IsAny<string>())).Returns(shoppingCartMock.Object);
 
-            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object, shoppingCartViewModelFactory.Object);
+            ShoppingCartController shoppingCartController = new ShoppingCartController(shoppingCartMock.Object, cartIdentifierMock.Object);
             shoppingCartController.TempData["Order"] = coffeeMock.Object;
 
             //Act

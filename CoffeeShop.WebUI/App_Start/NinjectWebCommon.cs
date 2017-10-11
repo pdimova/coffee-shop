@@ -28,13 +28,6 @@ namespace CoffeeShop.WebUI.App_Start
     using Logic.ShoppingCart;
     using CoffeeShop.Logic.Cart.Repository;
     using CoffeeShop.Logic.Coffee.Condiments;
-    using CoffeeShop.WebUI.ViewModels.Store;
-    using System.Web.Mvc;
-    using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
-    using CoffeeShop.WebUI.ViewModels.ShoppingCart;
-    using System.Reflection;
-    using CoffeeShop.WebUI.ViewModels.Checkout.Abstract;
-    using CoffeeShop.WebUI.ViewModels.Checkout;
 
     public static class NinjectWebCommon
     {
@@ -97,17 +90,6 @@ namespace CoffeeShop.WebUI.App_Start
             .SelectAllInterfaces()
             .EndingWith("Factory")
             .BindToFactory());
-
-            kernel.Bind(x => x
-            .FromThisAssembly()
-            .SelectAllClasses()
-            .BindAllInterfaces());
-
-            kernel.Bind(x => x
-             .FromThisAssembly()
-             .SelectAllInterfaces()
-             .EndingWith("Factory")
-             .BindToFactory());
 
             kernel.Bind<ICartRepository>().To<CartRepository>();
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
@@ -185,7 +167,6 @@ namespace CoffeeShop.WebUI.App_Start
                 .WithConstructorArgument("assemblyFullName", typeof(ICoffee).Assembly.GetName())
                 .WithConstructorArgument("commonCoffeeTypesNamespace", typeof(Americano).Namespace)
                 .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Ristretto).Namespace);
-
 
             //kernel.Bind<OrderWizardViewModel>().ToSelf().WhenInjectedExactlyInto<ViewResult>().WithConstructorArgument(kernel.Get<IMenuProvider>());
         }
