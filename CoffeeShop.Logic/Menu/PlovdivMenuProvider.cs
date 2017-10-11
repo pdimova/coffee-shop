@@ -12,12 +12,14 @@
         public PlovdivMenuProvider(
             AssemblyName assemblyFullName,
             string commonCoffeeTypesNamespace,
-            string specificCoffeeTypesNamespace) : base(assemblyFullName, commonCoffeeTypesNamespace)
+            string specificCoffeeTypesNamespace,
+            string condimentsNamespace) : base(assemblyFullName, commonCoffeeTypesNamespace, condimentsNamespace)
         {
             if (specificCoffeeTypesNamespace == null)
             {
                 throw new ArgumentNullException();
             }
+
             this.specificCoffeeTypesNamespace = specificCoffeeTypesNamespace;
         }
 

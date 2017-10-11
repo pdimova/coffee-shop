@@ -63,6 +63,11 @@
     <Compile Include="CoffeeTests\CoffeeTypeTests\Ristretto_Should.cs" />
     <Compile Include="CoffeeTests\CoffeeTypeTests\Doppio_Should.cs" />
     <Compile Include="CoffeeTests\CoffeeTypeTests\Latte_Should.cs" />
+    <Compile Include="MenuTests\FakeCommonCoffeeTypes\FakeEspresso.cs" />
+    <Compile Include="MenuTests\FakeCondiments\FakeMilk.cs" />
+    <Compile Include="MenuTests\FakeSpecialCoffeeTypes\Plovdiv\FakeRistretto.cs" />
+    <Compile Include="MenuTests\FakeSpecialCoffeeTypes\Sofia\FakeDoppio.cs" />
+    <Compile Include="MenuTests\PlovdivMenuProvider_Should.cs" />
     <Compile Include="MenuTests\SofiaMenuProvider_Should.cs" />
     <Compile Include="OrderTests\Order_Should.cs" />
     <Compile Include="OrderTests\ProcessingOrder_Should.cs" />

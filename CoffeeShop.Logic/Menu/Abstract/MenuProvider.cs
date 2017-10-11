@@ -8,11 +8,15 @@
 
     public abstract class MenuProvider : IMenuProvider
     {
-        //private const string coffeeTypesNamespace = "CoffeeShop.Logic.Coffee.CoffeeTypes";
         private readonly AssemblyName assemblyFullName;
         private readonly string commonCoffeeTypesNamespace;
+        private readonly string condimentsNamespace;
 
-        public MenuProvider(AssemblyName assemblyFullName, string commonCoffeeTypesNamespace)
+
+        public MenuProvider(
+            AssemblyName assemblyFullName,
+            string commonCoffeeTypesNamespace,
+            string condimentsNamespace)
         {
             if (assemblyFullName == null)
             {
@@ -24,8 +28,14 @@
                 throw new ArgumentNullException();
             }
 
+            if (condimentsNamespace == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.assemblyFullName = assemblyFullName;
             this.commonCoffeeTypesNamespace = commonCoffeeTypesNamespace;
+            this.condimentsNamespace = condimentsNamespace;
         }
 
         public virtual ICollection<string> GetCoffeeTypes()
@@ -49,7 +59,7 @@
 
         public IEnumerable<string> GetCoffeeCondiments()
         {
-            return this.GetNames("CoffeeShop.Logic.Coffee.Condiments");
+            return this.GetNames(condimentsNamespace);
         }
 
         private IEnumerable<string> GetNames(string fullNamespace)

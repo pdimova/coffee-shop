@@ -159,7 +159,8 @@ namespace CoffeeShop.WebUI.App_Start
                 .InSingletonScope()
                 .WithConstructorArgument("assemblyFullName", typeof(ICoffee).Assembly.GetName())
                 .WithConstructorArgument("commonCoffeeTypesNamespace", typeof(Americano).Namespace)
-                .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Doppio).Namespace);
+                .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Doppio).Namespace)
+                .WithConstructorArgument("condimentsNamespace", typeof(Milk).Namespace);
 
             kernel.Bind<ICoffeeStore>().To<PlovdivCoffeeStore>()
                 .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
@@ -170,7 +171,8 @@ namespace CoffeeShop.WebUI.App_Start
                 .InSingletonScope()
                 .WithConstructorArgument("assemblyFullName", typeof(ICoffee).Assembly.GetName())
                 .WithConstructorArgument("commonCoffeeTypesNamespace", typeof(Americano).Namespace)
-                .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Ristretto).Namespace);
+                .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Ristretto).Namespace)
+                .WithConstructorArgument("condimentsNamespace", typeof(Milk).Namespace);
 
             //kernel.Bind<OrderWizardViewModel>().ToSelf().WhenInjectedExactlyInto<ViewResult>().WithConstructorArgument(kernel.Get<IMenuProvider>());
         }

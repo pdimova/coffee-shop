@@ -7,13 +7,13 @@
 
     public class SofiaMenuProvider : MenuProvider
     {
-        //private const string sofiaStoreSpecialTypesNamespace = "CoffeeShop.Logic.Coffee.CoffeeTypes.SofiaStoreSpecialTypes";
         private readonly string specificCoffeeTypesNamespace;
 
         public SofiaMenuProvider(
             AssemblyName assemblyFullName,
             string commonCoffeeTypesNamespace,
-            string specificCoffeeTypesNamespace) : base(assemblyFullName, commonCoffeeTypesNamespace)
+            string specificCoffeeTypesNamespace,
+            string condimentsNamespace) : base(assemblyFullName, commonCoffeeTypesNamespace, condimentsNamespace)
         {
             if (specificCoffeeTypesNamespace == null)
             {
