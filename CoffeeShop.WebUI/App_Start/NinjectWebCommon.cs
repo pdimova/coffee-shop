@@ -91,6 +91,11 @@ namespace CoffeeShop.WebUI.App_Start
             .EndingWith("Factory")
             .BindToFactory());
 
+            kernel.Bind(x => x
+            .FromThisAssembly()
+            .SelectAllClasses()
+            .BindAllInterfaces());
+
             kernel.Bind<ICartRepository>().To<CartRepository>();
             kernel.Bind<IOrderRepository>().To<OrderRepository>();
 
@@ -108,7 +113,6 @@ namespace CoffeeShop.WebUI.App_Start
             kernel.Bind<ICoffee>().To<Cinnamon>().NamedLikeFactoryMethod((ICondimentsFactory f) => f.GetCinnamon(default(ICoffee)));
             kernel.Bind<ICoffee>().To<Milk>().NamedLikeFactoryMethod((ICondimentsFactory f) => f.GetMilk(default(ICoffee)));
             kernel.Bind<ICoffee>().To<WhippedCream>().NamedLikeFactoryMethod((ICondimentsFactory f) => f.GetWhippedCream(default(ICoffee)));
-
 
             var sofiaStoreStrategies = new Dictionary<string, Func<CoffeSizeType, ICoffee>>
             {

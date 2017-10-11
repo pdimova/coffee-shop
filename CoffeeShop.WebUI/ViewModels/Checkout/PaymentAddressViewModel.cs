@@ -25,7 +25,6 @@ namespace CoffeeShop.WebUI.ViewModels.Checkout
         [Required]
         public virtual string Email { get; set; }
 
-        [Required]
         public virtual string Details { get; set; }
     }
 }
