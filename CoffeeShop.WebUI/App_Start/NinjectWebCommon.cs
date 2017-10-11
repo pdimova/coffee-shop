@@ -32,6 +32,9 @@ namespace CoffeeShop.WebUI.App_Start
     using System.Web.Mvc;
     using CoffeeShop.WebUI.ViewModels.ShoppingCart.Factory;
     using CoffeeShop.WebUI.ViewModels.ShoppingCart;
+    using System.Reflection;
+    using CoffeeShop.WebUI.ViewModels.Checkout.Abstract;
+    using CoffeeShop.WebUI.ViewModels.Checkout;
 
     public static class NinjectWebCommon
     {
@@ -167,7 +170,10 @@ namespace CoffeeShop.WebUI.App_Start
 
             kernel.Bind<IMenuProvider>().To<SofiaMenuProvider>()
                 .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Sofia"))
-                .InSingletonScope();
+                .InSingletonScope()
+                .WithConstructorArgument("assemblyFullName", typeof(ICoffee).Assembly.GetName())
+                .WithConstructorArgument("commonCoffeeTypesNamespace", typeof(Americano).Namespace)
+                .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Doppio).Namespace);
 
             kernel.Bind<ICoffeeStore>().To<PlovdivCoffeeStore>()
                 .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
@@ -175,7 +181,11 @@ namespace CoffeeShop.WebUI.App_Start
 
             kernel.Bind<IMenuProvider>().To<PlovdivMenuProvider>()
                 .When(x => HttpContext.Current.Request.QueryString["city"].Contains("Plovdiv"))
-                .InSingletonScope();
+                .InSingletonScope()
+                .WithConstructorArgument("assemblyFullName", typeof(ICoffee).Assembly.GetName())
+                .WithConstructorArgument("commonCoffeeTypesNamespace", typeof(Americano).Namespace)
+                .WithConstructorArgument("specificCoffeeTypesNamespace", typeof(Ristretto).Namespace);
+
 
             //kernel.Bind<OrderWizardViewModel>().ToSelf().WhenInjectedExactlyInto<ViewResult>().WithConstructorArgument(kernel.Get<IMenuProvider>());
         }

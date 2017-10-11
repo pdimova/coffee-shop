@@ -8,12 +8,32 @@
 
     public abstract class MenuProvider : IMenuProvider
     {
-        public virtual ICollection<string> GetCoffeeTypes()
+        //private const string coffeeTypesNamespace = "CoffeeShop.Logic.Coffee.CoffeeTypes";
+        private readonly AssemblyName assemblyFullName;
+        private readonly string commonCoffeeTypesNamespace;
+
+        public MenuProvider(AssemblyName assemblyFullName, string commonCoffeeTypesNamespace)
         {
-            return this.GetNames("CoffeeShop.Logic.Coffee.CoffeeTypes").ToList();
+            if (assemblyFullName == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (commonCoffeeTypesNamespace == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.assemblyFullName = assemblyFullName;
+            this.commonCoffeeTypesNamespace = commonCoffeeTypesNamespace;
         }
 
-        public IEnumerable<string> GetCoffeeTypes(string fullNamespace)
+        public virtual ICollection<string> GetCoffeeTypes()
+        {
+            return this.GetNames(commonCoffeeTypesNamespace).ToList();
+        }
+
+        protected IEnumerable<string> GetCoffeeTypes(string fullNamespace)
         {
             return this.GetNames(fullNamespace);
         }
@@ -36,7 +56,7 @@
         {
             return
                Assembly
-               .GetExecutingAssembly()
+               .Load(this.assemblyFullName)
                .GetTypes()
                .Where(t => t.IsClass && t.Namespace == @fullNamespace)
                .Select(t => t.Name);

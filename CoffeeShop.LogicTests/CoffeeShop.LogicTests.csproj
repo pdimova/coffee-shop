@@ -63,6 +63,7 @@
     <Compile Include="CoffeeTests\CoffeeTypeTests\Ristretto_Should.cs" />
     <Compile Include="CoffeeTests\CoffeeTypeTests\Doppio_Should.cs" />
     <Compile Include="CoffeeTests\CoffeeTypeTests\Latte_Should.cs" />
+    <Compile Include="MenuTests\SofiaMenuProvider_Should.cs" />
     <Compile Include="OrderTests\Order_Should.cs" />
     <Compile Include="OrderTests\ProcessingOrder_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
