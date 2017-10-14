@@ -268,20 +268,26 @@
     <Content Include="Global.asax" />
     <Content Include="Content\main.css" />
     <Content Include="img\americano.png" />
-    <Content Include="img\capuccino.png" />
+    <Content Include="img\bottom.jpg" />
+    <Content Include="img\cappuccino.png" />
     <Content Include="img\coffee-logo.png" />
+    <Content Include="img\condiments\caramel.png" />
+    <Content Include="img\condiments\chocolate.png" />
+    <Content Include="img\condiments\cinnamon.png" />
+    <Content Include="img\condiments\milk.png" />
+    <Content Include="img\condiments\whippedcream.png" />
     <Content Include="img\espresso.png" />
     <Content Include="img\grande\americano.png" />
-    <Content Include="img\grande\capuccino.png" />
+    <Content Include="img\grande\cappuccino.png" />
     <Content Include="img\grande\espresso.png" />
     <Content Include="img\grande\latte.png" />
     <Content Include="img\latte.png" />
     <Content Include="img\medium\americano.png" />
-    <Content Include="img\medium\capuccino.png" />
+    <Content Include="img\medium\cappuccino.png" />
     <Content Include="img\medium\espresso.png" />
     <Content Include="img\medium\latte.png" />
     <Content Include="img\small\americano.png" />
-    <Content Include="img\small\capuccino.png" />
+    <Content Include="img\small\cappuccino.png" />
     <Content Include="img\small\espresso.png" />
     <Content Include="img\small\latte.png" />
     <Content Include="img\top.jpg" />
@@ -289,6 +295,7 @@
     <Content Include="Scripts\App\requester.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -307,12 +314,16 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
