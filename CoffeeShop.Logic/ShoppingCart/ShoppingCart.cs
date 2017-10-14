@@ -19,7 +19,22 @@ namespace CoffeeShop.Logic.ShoppingCart
 
         public ShoppingCart(ICartRepository cartRepository, ICartFactory cartFactory, IOrderRepository orderRepository)
         {
-            this.cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
+            if (cartRepository == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (cartFactory == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            if (orderRepository == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.cartRepository = cartRepository;
             this.cartFactory = cartFactory;
             this.orderRepository = orderRepository;
         }

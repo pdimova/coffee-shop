@@ -203,7 +203,7 @@ namespace CoffeeShop.LogicTests.StoresTests
             processingOrderMock.SetupGet(p => p.SelectedCoffeeSize).Returns(coffeeSize);
             processingOrderMock.SetupGet(p => p.SelectedCoffeeCodimentsList).Returns(condimentList);
 
-            CoffeSizeType size = CoffeSizeType.Small;
+            //CoffeSizeType size = CoffeSizeType.Small;
             Func<CoffeSizeType, ICoffee> func = s => new Americano(s);
             Func<ICoffee, ICoffee> funcMilk = c => new Milk(c);
             Func<ICoffee, ICoffee> funcChocolate = c => new Chocolate(c);
@@ -221,7 +221,7 @@ namespace CoffeeShop.LogicTests.StoresTests
 
             // Assert
             Mock.Verify(new Mock[] { condimentsStrategiesMock });
-            Assert.That(result.FullDescription, Contains.Substring(condimentList[0]).And.ContainsSubstring(condimentList[1]));
+            Assert.That(result.FullDescription, Contains.Substring(condimentList[0]).And.Contains(condimentList[1]));
             Assert.That(result, Is.InstanceOf<ICoffee>());
         }
     }
