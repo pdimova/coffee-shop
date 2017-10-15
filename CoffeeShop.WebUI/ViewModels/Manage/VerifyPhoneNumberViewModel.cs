@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿//using System.ComponentModel.DataAnnotations;
 
-namespace CoffeeShop.WebUI.ViewModels.Manage
-{
-    public class VerifyPhoneNumberViewModel
-    {
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
+//namespace CoffeeShop.WebUI.ViewModels.Manage
+//{
+//    public class VerifyPhoneNumberViewModel
+//    {
+//        [Required]
+//        [Display(Name = "Code")]
+//        public string Code { get; set; }
 
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-    }
-}
+//        [Required]
+//        [Phone]
+//        [Display(Name = "Phone Number")]
+//        public string PhoneNumber { get; set; }
+//    }
+//}
