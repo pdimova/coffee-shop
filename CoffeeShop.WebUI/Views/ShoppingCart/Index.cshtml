@@ -1,0 +1,99 @@
+﻿@using CoffeeShop.WebUI.ViewModels.ShoppingCart
+@model ShoppingCartViewModel
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h3>
+            <em>Review</em> your cart:
+        </h3>
+
+        <br />
+        <br />
+
+        <div id="update-message"></div>
+
+        <table>
+            <tr>
+                <th>
+                    Order
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.CartItems)
+            {
+                <tr id="row-@item.CoffeeId">
+                    <td>
+                        @item.CoffeeDescription
+                    </td>
+                    <td>
+                        @item.CoffeeCost
+                    </td>
+                    <td id="item-count-@item.CoffeeId">
+                        @item.Count
+                    </td>
+                    <td>
+                        <a href="#" class="RemoveLink btn btn-danger" data-id="@item.CoffeeId" role="button">X</a>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3">
+                    <strong>Total</strong>
+                </td>
+                <td id="cart-total">
+                    <strong>@Model.CartTotal</strong>
+                </td>
+            </tr>
+        </table>
+
+        <br />
+        @Html.ActionLink("Go for some more", "Index", "Store", new { city = ViewBag.City }, new { @class = "btn btn-warning", role = "button" })
+        @Html.ActionLink("Checkout >>", "Pay", "Checkout", "", new { @class = "btn btn-warning", role = "button" })
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/App/requester.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // Handler for .ready() called.
+            console.log(requester)
+            $('.RemoveLink').on("click", function (e) {
+
+                var recordToDelete = $(this).attr("data-id");
+
+                if (recordToDelete != '') {
+                    var url = "/ShoppingCart/RemoveFromCart"; @*"@Url.Action("RemoveFromCart", "ShoppingCart")";*@
+                    var body = { "id": recordToDelete };
+
+                    requester.ajaxPost(url, body)
+                        .then(data => {
+
+                            if (data.ItemCount == 0) {
+                                $('#row-' + data.DeleteId).fadeOut('slow');
+                            } else {
+                                $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                            }
+                            $('#cart-total').text(data.CartTotal);
+                            $('#update-message').text(data.Message);
+                            $('#cart-status').text('Cart (' + data.CartCount + ')');
+                        });
+                }
+            })
+        });
+    </script>
+}
