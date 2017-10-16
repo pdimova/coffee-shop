@@ -52,14 +52,11 @@ namespace CoffeeShop.Logic.ShoppingCart
 
         public void AddToCart(ICoffee orderedCofee)
         {
-
             var isAvailable = cartRepository.IsCartItemAvailable(shoppingCartId, orderedCofee.Id);
 
             ICart cartItem;
-
             if (!isAvailable)
             {
-
                 cartItem = cartFactory.CreateCart();
                 cartItem.CoffeeId = orderedCofee.Id;
                 cartItem.CoffeeDescription = orderedCofee.FullDescription;
@@ -78,31 +75,29 @@ namespace CoffeeShop.Logic.ShoppingCart
 
                 cartRepository.Update(cartItem);
             }
-
-
         }
 
         public int RemoveFromCart(string coffeeId)
         {
-
-            var cartItem = cartRepository.GetCartItemByCoffeeId(shoppingCartId, coffeeId);
+            var isAvailable = cartRepository.IsCartItemAvailable(shoppingCartId, coffeeId);
 
             int itemCount = 0;
-            if (cartItem == null)
+            if (isAvailable)
             {
+                itemCount = this.GetCount();
+                var cartItem = cartRepository.GetCartItemByCoffeeId(shoppingCartId, coffeeId);
 
+                if (cartItem.Count > 1)
+                {
+                    cartItem.Count--;
+                    itemCount--;
+                }
+                else
+                {
+                    cartRepository.Remove(cartItem);
+                }
             }
-
-            if (cartItem.Count > 1)
-            {
-                cartItem.Count--;
-                itemCount = cartItem.Count;
-            }
-            else
-            {
-                cartRepository.Remove(cartItem);
-            }
-
+            
             return itemCount;
         }
 
